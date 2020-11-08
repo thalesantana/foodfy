@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body{
+    font-family: 'Roboto-Regular', sans-serif;    
+}
+.all{
+    padding: 0 230px;
+    max-width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+.background{
+    background-color: #EEEEEE;
+    padding-top: 31px;
+    padding-bottom: 30px;
+}
+.links{
+        margin-left: 231px;
+        display: grid;
+        grid-template-columns: 0.226fr 0.08fr 0.50fr 0;
+        max-width: 940px;
+        align-items: center;    
+}
+
+.links #logo{
+    width: 90.6px;
+    height: 26.9px;
+    
+}
+.links a{
+    text-decoration: none;
+    font-size: 16px;
+    color: #111111;
+}
+
+#listing button{
+    margin-left: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #eeb0e6;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+.description{
+    height:366px;
+    width: 100%;
+    border-radius: 30px;
+    background-color: #FBDFDB;
+    position: relative;
+    margin-top: 20px;
+}
+.description img{
+    left: 624px;  
+    top: 66px;  
+    position: absolute;
+}
+.description h1{
+    size: 32px;
+   padding-top: 117px;
+   padding-left: 60px;
+   padding-bottom: 10px;
+   
+}
+.description p{
+    size: 16px;
+    padding-left: 60px;
+    padding-right: 564px;
+    padding-bottom: 117px;
+    color: #000000;
+    opacity: 70%;
+    width: 316px;
+    height: 84px;
+    line-height: 28px;    
+}
+h2{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.index-cards{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding-top: 20px;
+}
+.card{
+    cursor: pointer;
+}
+.img-container img{
+    width: 100%;
+    
+    border-radius: 20px;
+}
+
+.R-title{
+    font-size: 18px;
+    text-decoration: none;
+    padding-top: 20px;   
+}
+.S-title{
+    font-size: 14px;
+    color: #777777;
+    padding-top: 5px;
+}
+
+.footer{
+    width: 100%;
+    height: 62px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin-top: 50px;
+}
+.copyrigth{
+    padding-top: 23px;
+    padding-bottom: 23px;
+    font-size: 14px;
+    color: #999999;
+}
+
+/*////// SOBRE /////*/
+.title{
+    margin-top: 20px;
+}
+.text{
+    padding-top: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    padding: bottom 30px;
+    font-size: 18px;
+    color: #444444;
+    line-height: 28px;
+}
+
+/*////// RECEITAS /////*/
+
+.recipes{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding-top: 20px;
+    
+    }
+
+
+/* === DETAIL=== */
+
+.recipe{
+    max-width: 940px;
+}
+.recipe img{
+    margin-top: 16px;
+    border-radius: 15px;
+}
+.recipe  h1{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+}
+.author{
+    text-align: center;
+    padding-top: 4px;
+    font-family: "Roboto-Regular";
+    color: #777777;
+}
+.recipe  h2{
+    font-family: "roboto-bold";
+    font-size: 24px;
+    
+}
+
+.recipe li{
+    font-family: Roboto-Regular;
+    font-size: 18px;
+    color: #444444;
+    line-height: 28px;
+}
+
+.button{
+    color: #999999;
+    font-size: 12px;
+    font-family: Roboto-Bold;
+    align-items: flex-end;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+.button-line{
+    display: flex;
+    align-items: baseline;
+    
+}
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
