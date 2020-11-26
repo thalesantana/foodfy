@@ -1,0 +1,55 @@
+{%extends "privateLayout.njk" %}
+
+{%block head%}
+    <title>Criand Receita</title>
+    <button class="save">Salvar Receita</button>
+{%endblock%}
+
+{%block content %}
+
+        <form class="form" method="POST" action="/admin/recipes">
+        <button class="save">Salvar Receita</button>
+
+        <section class="create">
+
+            <h3>Imagem da Receita</h3>
+            <div>
+                <input 
+                    type="url"
+                    name = "avatar_url"
+                    placeholder = "http://"
+                    value = "{{recipes.image}}"
+                >
+            </div>
+
+            <h3>Igredientes</h3>
+            <div>
+                <input 
+                    type="text"
+                    name = "igredients"
+                    value = "{{recipes.igredients}}"
+                >
+            </div>
+            <div>Adicionar novo ingrediente</div>
+
+           <h3>Modo de preparo</h3>
+            <div>
+                <input 
+                    type="text"
+                    name = "preparation"
+                    value = "{{recipes.preparation}}"
+                >
+            </div>
+            <div>Modo de preparo</div>
+            
+            <h3>Informações Adicionais</h3>
+            <div>
+                <input 
+                    type="text"
+                    name = "information"
+                    value = "{{recipes.information}}"
+                >
+            </div>
+           
+        </section>
+{%endblock%}         

@@ -2,12 +2,12 @@
 
 module.exports={
     index(req,res){
-        return res.render("recipes/index")
+        return res.render("publicRecipes/index")
     },
     about(req,res){
-        return res.render("recipes/about")
+        return res.render("publicRecipes/about")
     },
     recipes(req,res){
-        return res.render("recipes/recipes-list")
+        return res.render("publicRecipes/recipes-list")
     }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    
+    {%block head%}
+        <title>Foodfy</title>
+    {%endblock%}
+    
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body >
+     <header class="background">
+            <div class="links">
+                <a href="/" id="logo"><img src="/img/logo.png" alt="Logo"></a>  
+                <a href="/recipes-list" id="recipes">RECEITAS</a>
+                <a href="/showChefs" id="chefs">CHEFS</a>
+            </div>
+            
+        </header>
+    
+    <div class="all">
+       
+        
+        {% block content %}
+        {% endblock %}   
+        
+    </div>
+</body>
+
+</html>
