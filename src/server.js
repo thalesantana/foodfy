@@ -1,6 +1,6 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
-const routes = require("./routes/privateRoutes")
+const routes = require("./routes/routes")
 
 const methodOverride = require('method-override')
 
@@ -17,7 +17,7 @@ nunjucks.configure("src/app/views",{
     express: server,
     autoescape: false,
     nocache:true
-})
+}) 
 
 server.listen(5000, function(){
     console.log("O PAI TA ON")
