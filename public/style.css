@@ -6,7 +6,7 @@
     border: 0;
 }
 body{
-    font-family: 'Roboto-Regular', sans-serif;    
+    font-family: 'Roboto', sans-serif;    
 }
 .all{
     padding: 0 230px;
@@ -38,7 +38,7 @@ body{
     color: #111111;
 }
 
-#listing button{
+#privateIndex button{
     margin-left: 200px;
     font-size: 16px;
     cursor: pointer;
@@ -204,3 +204,7 @@ h2{
 .show{
     display: block;
 }
+
+
+
+

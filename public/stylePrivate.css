@@ -1,0 +1,136 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body{
+    font-family: 'Roboto', sans-serif;    
+}
+.content{
+    max-width: 940px;
+    padding: 0 230px;
+    position: relative;
+    margin-right: 0;
+}
+.backgroundCreate{
+    background-color: #111111;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 231px;
+}
+.backgroundCreate a:hover{
+    font-weight: bold;
+    color:#ffffff;
+}
+#newLogo{
+    margin-right: 50.4px;
+}
+.recipes{
+    margin-right: 31px;
+}
+
+.recipes, .chefs{
+    text-decoration: none;
+    cursor: pointer;
+    color: #999999;
+}
+.top{
+    padding-top:50px;
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    
+}
+.createTitle{
+    font-style: bold;
+    font-size: 24px;
+    color: #111111; 
+}
+
+.save{
+    position: relative;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    color: #ffffff;
+    background-color: #6558C3;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+h3{
+    font-style: bold;
+    font-size: 16px;
+    color: #111111;
+    padding-bottom: 10px;
+}
+
+input, select{
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    height: 49px;
+    width: 940px;
+    margin-bottom: 30px;
+}
+
+input[type=text]{
+    margin-bottom: 15px;
+}
+
+.add-ingredient,.add-pass{
+    font-style: bold;
+    font-size: 16px;
+    color: #6558C3;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+textarea[name=information]{
+    width: 100%;
+    height: 230px;
+    margin-bottom: 609px;
+    display: flex;
+    text-align: start;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    resize: none;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+/*////// Show recipe/////*/
+
+.recipeImg{
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+.middle{
+    position: relative;
+    text-align: center;
+    padding-bottom: 31px;
+}
+#title{
+    font-size: 36px;
+    padding-bottom: 4px;
+}
+
+.chefName{
+    font-size: 20px;
+    color: #777777;
+}
+.steps{
+    font-size: 24px;
+    color: #111111;
+    padding-bottom: 19px;
+}
+
+.textArea{
+    font-size: 18px;
+    color: #444444;
+    line-height: 28px;
+    padding-bottom: 41px;
+}
+

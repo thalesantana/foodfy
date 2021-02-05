@@ -1,0 +1,29 @@
+{%extends "privateLayout.njk" %}
+
+{%block content%}
+<form class="form" method="POST" action="/admin/chefs">
+<section class="create"> 
+<div class='top'>
+    <h1 class="createTitle">Criando Chef</h1>
+    <button type="submit" class="save">Salvar Receita</button>
+</div> 
+
+    <h3>Nome</h3>
+    <div>
+        <input 
+            type="text"
+            name = "name"
+            value = "{{chefs.name}}"
+        >
+    </div>
+
+    <h3>Avatar</h3>
+    <div>
+        <input 
+            type="url"
+            name = "avatar"
+            value = "{{chefs.avatar}}"
+        >
+    </div>
+</section>
+{%endblock%}

@@ -18,7 +18,6 @@ nunjucks.configure("src/app/views",{
     autoescape: false,
     nocache:true
 }) 
-
 server.listen(5000, function(){
     console.log("O PAI TA ON")
 })

@@ -1,37 +1,32 @@
-{%extends "privateLayout.njk" %}
-
-{%block head%}
-    <title>Receitas - Foodfy</title>
-{%endblock%}
-
-{%block content %}
-        <section class="recipe">
-            
-               <img src="{{items.image}}" alt="Imagem de {{items.title}}">
-               <h1>{{items.title}}</h1> 
-               <p class = "author">por {{items.author}}</p>
-               
-               <div class ="button-line"><h2>Igredientes</h2> <a class="button">Esconder</a></div>
-               
-               <div class="content">
-                {%for item in items.ingredients%}
-
-                    <li >{{item}}</li>
-
-                {%endfor%}
-               </div> 
-                
-                    <div class ="button-line"><h2>Modo de preparo</h2> <a class="button">Esconder</a></div> 
-                    <div class="content">
-                    {%for item in items.preparation%}
-                            <li >{{item}}</li>
-                    {%endfor%}
-                </div>
-                <div class ="button-line"><h2>Informações Adicionais</h2> <a class="button">Esconder</a></div>
-                <div > 
-                    <p class="content">{{items.information}}</p>
-                </div>
-                <script src="/script.js"></script>
-        </section>
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
         
-{%endblock%}
+        {%block head%}
+            <title>Foodfy</title>
+        {%endblock%}
+        
+        <link rel="stylesheet" href="/styleCreate.css">
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap');
+        </style>
+    </head>
+
+    <body >
+        <header class="backgroundCreate">
+                    <a href="/" id="newLogo"><img src="/img/newLogo.png" alt="Logo"></a>      
+        </header>
+        
+        <div class="body">
+         
+            <form class="form" method="POST" action="/admin/recipes">
+
+            {%include 'admin/recipes/fields.njk'%}
+        </div>
+            <script src="/ingredient.js"></script>
+    </body>
+
+</html>
+        
+     
