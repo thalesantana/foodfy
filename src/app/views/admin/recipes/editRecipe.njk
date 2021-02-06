@@ -22,7 +22,92 @@
          
             <form class="form" method="POST" action="/admin/recipes">
 
-            {%include 'admin/recipes/fields.njk'%}
+             <h3>Imagem da Receita</h3>
+    <div>
+        <input 
+            type="url"
+            name = "image"
+            value = "{{recipes.image}}"
+        >
+    </div>
+
+    <h3>Nome da Receita</h3>
+    <div>
+        <input 
+            type="text"
+            name = "title"
+            value = "{{recipes.title}}"
+        >
+    </div>
+
+    <h3>Chef</h3>
+    <div>
+        <select name="chef_id" placeholder="Selecione um Chef"> 
+            <option value=""  disabled selected>Selecione um chef</option>
+            {%for chef in chefOptions%}
+                <option value="{{chef.id}}"{%if recipes.chef_id == chef.id %}selected{%endif%}>
+                    {{chef.name}}
+                </option>
+            {%endfor%}
+        </select>
+    </div>
+
+    <h3>Igredientes</h3>
+    <div id="ingredients">
+        {%if recipes.igredients%}
+            {%for item in recipes.igredients%}
+                <div class="ingredient">
+                    <input 
+                        type="text"
+                        name = "ingredients"                    >
+                </div>
+            {%endfor%}    
+        {%else%}
+            <div class="ingredient">
+                    <input 
+                        type="text"
+                        name = "ingredients"
+                    >
+                </div>
+        {%endif%}
+    </div>
+    <div type="button"  class="add-ingredient">Adicionar novo ingrediente</div>
+
+<h3>Modo de preparo</h3>
+    <div id="preparations">
+        {%if recipes.preparation%}
+            {%for item2 in prepare%}
+                <div class="preparation">
+                    <input 
+                        type="text"
+                        name ="preparation"
+
+                    >
+                </div>
+            {%endfor%}    
+        {%else%}
+            <div class="preparation">
+                    <input 
+                        type="text"
+                        name = "preparation"
+
+                    >
+                </div>
+        {%endif%}
+    </div>
+    <div type="button" class="add-pass" >Adicionar novo passo</div>
+    
+    <h3>Informações Adicionais</h3>
+    <div>
+        <textarea 
+            type="text"
+            name = "information"
+            value = "{{recipes.information}}"
+            id="ingredients"
+        >
+    </textarea>
+
+</section> 
         </div>
             <script src="/ingredient.js"></script>
     </body>

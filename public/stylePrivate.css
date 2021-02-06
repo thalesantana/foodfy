@@ -40,6 +40,8 @@ body{
     padding-bottom: 20px;
     display: grid;
     grid-template-columns: 6fr 1fr;
+    align-items: center;
+    width: 940px;
     
 }
 .createTitle{
@@ -106,6 +108,8 @@ option[value=""][disabled] {
 .recipeImg{
     border-radius: 15px;
     margin-bottom: 50px;
+    width: 940px;
+    height: 280px;
 }
 .middle{
     position: relative;

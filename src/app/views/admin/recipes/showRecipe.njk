@@ -22,10 +22,8 @@
 <h3 class="steps">Igredientes</h3>
     <div class="textArea">
             {%for item in recipe.ingredients%}
-                <div id="ingredients">
-                    <div class="ingredient">
-                        - {{item}}
-                    </div>  
+                <div >
+                    -{{item}}
                 </div>
             {%endfor%} 
         </div>
@@ -33,10 +31,8 @@
 <h3 class="steps">Modo de preparo</h3>
     <div class="textArea">
         {%for item in recipe.preparation%}
-            <div id="preparations">
-                <div class="preparation">
-                    -{{item}}
-                </div>
+            <div >
+                -{{item}}
             </div>
         {%endfor%} 
     </div>

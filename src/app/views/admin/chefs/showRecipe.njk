@@ -1,0 +1,34 @@
+{%extends "privateLayout.njk" %}
+
+{%block head%}
+    <title>Chef</title>
+{%endblock%}
+
+{%block content %}
+<section class="show"> 
+    <div class='top'>
+        <h1 class="showTitle">Chef:{{chefs.title}}</h1>
+        <button type="submit" class="save">Editar Chef</button>
+    </div> 
+
+    <div><img src="{{chefs.avatar}" alt="imagem de {{chefs.name}}" class="recipeImg"></div>
+
+    <div class="middle">
+        <h3 id="title">{{chefs.name}}</h3>
+        <p class=chefName>{{chefs.totalRecipes}}</p>
+    </div>
+    
+
+<h3 class="recipesList">Receitas</h3>
+    <div class="recipesArea">
+            {%for item in recipe.ingredients%}
+                <div id="ingredients">
+                    <div class="ingredient">
+                        - {{item}}
+                    </div>  
+                </div>
+            {%endfor%} 
+        </div>
+
+</section> 
+{%endblock%}

@@ -19,18 +19,20 @@ module.exports = {
             }
         }
         
-        recipe.create(req.body, function(){
-            return res.redirect(`/admin/recipes/${recipes.id}`)
+        recipe.create(req.body, function(recipe){
+            return res.redirect(`/admin/recipes/${recipe.id}`)
         })   
     },
   
     show(req,res){
         recipe.find(req.params.id, function(recipe){
             if(!recipe) return res.send("recipe not found!")
-            
+
             recipe.ingredients = recipe.ingredients.split(',')
-            recipe.preparation= recipe.preparation.split('.')
-       
+            recipe.preparation= recipe.preparation.split(',')
+            console.log(recipe.ingredients)
+            console.log(recipe.preparation)
+            
             chef.chefsSelectOptions(function(options){
                 return res.render('admin/recipes/showRecipe',{recipe,chefOptions:options})
             })

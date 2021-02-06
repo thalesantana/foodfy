@@ -25,11 +25,12 @@ module.exports = {
             date(Date.now()).iso
         ]
         
-        db.query(query,values, function(err, results){
-            console.log(err)
-            console.log(results)
+        db.query(query, values, function(err, results){
+            if(err) throw `Database Error!${err}`
+
+            callback(results.rows[0])
         })
-    },
+   },
     
     find(id, callback){
         db.query(`
