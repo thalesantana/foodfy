@@ -11,7 +11,7 @@
                 <div class="indexcards">
                     {%for recipe in RecipeData%}
                             <div class="indexCard">
-                                <img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="indexRecipeImg">
+                                <a href="/recipe/{{recipe.id}}"><img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="indexRecipeImg"></a>
                                 <div class="indexDetails">
                                     <h4>{{recipe.title}}</h4>
                                     {%for chefs in chef%}
@@ -19,6 +19,7 @@
                                            <p>por {{chefs.name}}</p> 
                                         {% endif %} 
                                     {%endfor%}  
+                                    
                                 </div>
                             </div>                        
                     {%endfor%}

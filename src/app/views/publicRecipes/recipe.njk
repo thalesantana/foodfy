@@ -1,4 +1,4 @@
-{%extends "privateLayout.njk" %}
+{%extends "layout.njk" %}
 
 {%block head%}
     <title>Receita</title>
@@ -8,7 +8,6 @@
 <section class="show"> 
     <div class='top'>
         <h1 class="showTitle">Receita:{{recipe.title}}</h1>
-        <a class = "editRecipe" href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
     </div> 
 
     <div><img src="{{recipe.image}}" alt="imagem {{recipe.title}}" class="recipeImg"></div>

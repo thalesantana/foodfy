@@ -92,6 +92,9 @@ body{
 
 .indexcards{
     display: grid;
+    object-fit: cover;
+    cursor: pointer;
+    max-width: 940px;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     row-gap: 30px;

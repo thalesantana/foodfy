@@ -31,11 +31,13 @@ module.exports={
         })
     },
     show(req,res){
-        data.find(req.params.id, function(recipe){
+        data.findRecipe(req.params.id, function(recipe){
+            //console.log(recipe)
             if(!recipe) return res.send("recipe not found!")
 
             data.chefsSelectOptions(function(options){
-                return res.render('admin/recipes/showRecipe',{recipe,chefOptions:options})
+                
+                return res.render('publicRecipes/recipe',{recipe,chefOptions:options})
             })
         })
     },

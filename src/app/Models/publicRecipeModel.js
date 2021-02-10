@@ -9,6 +9,16 @@ module.exports = {
         GROUP BY chefs.id `, [id],function(err,results){
                 if(err) throw `Database Error!${err}`
                 
+                //console.log(results.rows)
+                callback(results.rows[0])
+        })
+    },
+    findRecipe(id, callback){
+        db.query(`
+        SELECT * FROM recipes
+        WHERE recipes.id = $1 `, [id],function(err,results){
+                if(err) throw `Database Error!${err}`
+                
                 callback(results.rows[0])
         })
     },
