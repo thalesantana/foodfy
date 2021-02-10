@@ -2,11 +2,26 @@
 
 {%block content %}
         <div class="description">
-            <h1>Gerenciar receitas</h1>
+            <h3>Gerenciar Receitas</h3>
         </div>
-            <section class="index-cards">
-                
-               
+            <div class="recipesCard">
+                {%for recipe in recipeData%}
+                   
+                        <div class="recipeCard">
+                            <img src="{{recipe.image}}" alt="foto de {{recipe.title}}" id="recipeImg">
+                            <div class="details">
+                                <h4>{{recipe.title}}</h4>
+                                {%for chefs in chef%}
+                                    {% if chefs.id == recipe.chef_id %}
+                                        <p>por {{chefs.name}}</p> 
+                                    {% endif %} 
+                                {%endfor%}  
+                                <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+                            </div>  
+                        </div> 
+
+                {%endfor%}
+            </div>
                 
             </section>
         

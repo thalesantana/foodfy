@@ -2,8 +2,6 @@ const cards = document.querySelectorAll(".card")
 
 const buttons = document.querySelectorAll(".button")
 const content = document.querySelectorAll(".content")
-console.log(buttons)
-console.log(content)
 
 for (let card of cards) {
     card.addEventListener("click", function () {

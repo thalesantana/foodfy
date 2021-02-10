@@ -1,0 +1,42 @@
+{%extends "privateLayout.njk" %}
+
+{%block head%}
+    <title>Chef</title>
+{%endblock%}
+
+{%block content %}
+<section class="show"> 
+    <div class='top'>
+        <h1 class="showTitle">Chef: {{chef.name}}</h1>
+        <a class = "edit" href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a> 
+    </div> 
+
+    <div class="chefInfo">
+        <img src="{{chef.avatar}}" alt="imagem de {{chef.name}} " class="chefImg">
+        <h3 id="title">{{chef.name}}</h3>
+        <p class=total>{{chef.total_recipes}} receitas</p>
+    </div>
+
+    <h3 id="recipes">Receitas</h3>
+    <div class="recipesCard">
+                {%for recipe in recipeData%}
+                    {%if recipe.chef_id == chef.id %}
+                        <div class="recipeCard">
+                            <img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="recipeImg">
+                            <div class="details">
+                                <h4>{{recipe.title}}</h4>
+                                {%for chefs in chef%}
+                                        {% if chefs.id == recipe.chef_id %}
+                                           <p>por {{chefs.name}}</p> 
+                                        {% endif%}
+                                {%endfor%}
+                                <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+                            </div>
+                            
+                        </div> 
+                    {%endif%}
+                        
+                {%endfor%}
+    </div>
+</section> 
+{%endblock%}

@@ -1,0 +1,21 @@
+{%extends "privateLayout.njk" %}
+
+{%block content %}
+        <div class="description">
+            <h3>Gerenciar Chefs</h3>
+        </div>
+            <section class="index-cards">
+                {%for chefs in chef%}
+                <div class="chefCard">
+                    <img src="{{chefs.avatar}}" alt="foto de {{chefs.name}}" id="chefImg">
+                    <div class="detailsChef">
+                        <h4>{{chefs.name}}</h4>
+                        <a href="/admin/chefs/{{chefs.id}}">Visualizar</a>
+                    </div>
+                </div> 
+               {%endfor%}  
+                
+            </section>
+        
+{%endblock%}
+

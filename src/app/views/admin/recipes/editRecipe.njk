@@ -1,33 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt">
-    <head>
-        <meta charset="UTF-8">
-        
-        {%block head%}
-            <title>Foodfy</title>
-        {%endblock%}
-        
-        <link rel="stylesheet" href="/styleCreate.css">
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap');
-        </style>
-    </head>
+{%extends "privateLayout.njk"%}
 
-    <body >
-        <header class="backgroundCreate">
-                    <a href="/" id="newLogo"><img src="/img/newLogo.png" alt="Logo"></a>      
-        </header>
-        
-        <div class="body">
-         
-            <form class="form" method="POST" action="/admin/recipes">
+{%block content%}
 
-             <h3>Imagem da Receita</h3>
+<section class="create"> 
+    <div class='top2'>
+        <h1 id="form-delete" class="createTitle">Editando Receita</h1>
+        <form method="POST" action="/admin/recipes?_method=DELETE" >
+            <button  type="submit" class="delet">Deletar</button>
+            <input type="hidden" name="id" value="{{recipe.id}}">
+            <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
+        </form>
+        <form class="form" method="POST" action="/admin/recipes?_method=PUT">
+            <button type="submit" class="save">Salvar Chef</button>
+        </div> 
+
+        <h3>Imagem da Receita</h3>
     <div>
         <input 
             type="url"
             name = "image"
-            value = "{{recipes.image}}"
+            value = "{{recipe.image}}"
         >
     </div>
 
@@ -36,7 +28,7 @@
         <input 
             type="text"
             name = "title"
-            value = "{{recipes.title}}"
+            value = "{{recipe.title}}"
         >
     </div>
 
@@ -45,21 +37,22 @@
         <select name="chef_id" placeholder="Selecione um Chef"> 
             <option value=""  disabled selected>Selecione um chef</option>
             {%for chef in chefOptions%}
-                <option value="{{chef.id}}"{%if recipes.chef_id == chef.id %}selected{%endif%}>
+                <option value="{{chef.id}}"{%if recipe.chef_id == chef.id %}selected{%endif%}>
                     {{chef.name}}
                 </option>
             {%endfor%}
         </select>
     </div>
 
-    <h3>Igredientes</h3>
+<h3>Igredientes</h3>
     <div id="ingredients">
-        {%if recipes.igredients%}
-            {%for item in recipes.igredients%}
+        {%if recipe.ingredients%}
+            {%for item in recipe.ingredients%}
                 <div class="ingredient">
                     <input 
                         type="text"
-                        name = "ingredients"                    >
+                        name = "ingredients"
+                        value="{{item}}"                  
                 </div>
             {%endfor%}    
         {%else%}
@@ -67,6 +60,7 @@
                     <input 
                         type="text"
                         name = "ingredients"
+                        value="{{item}}" 
                     >
                 </div>
         {%endif%}
@@ -75,13 +69,13 @@
 
 <h3>Modo de preparo</h3>
     <div id="preparations">
-        {%if recipes.preparation%}
-            {%for item2 in prepare%}
+        {%if recipe.preparation%}
+            {%for item2 in recipe.preparation%}
                 <div class="preparation">
                     <input 
                         type="text"
                         name ="preparation"
-
+                        value="{{item2}}" 
                     >
                 </div>
             {%endfor%}    
@@ -90,7 +84,7 @@
                     <input 
                         type="text"
                         name = "preparation"
-
+                        value="{{item2}}"
                     >
                 </div>
         {%endif%}
@@ -98,20 +92,19 @@
     <div type="button" class="add-pass" >Adicionar novo passo</div>
     
     <h3>Informações Adicionais</h3>
-    <div>
         <textarea 
             type="text"
             name = "information"
-            value = "{{recipes.information}}"
             id="ingredients"
-        >
-    </textarea>
+        >{{recipe.information}}
+        </textarea>
 
 </section> 
-        </div>
-            <script src="/ingredient.js"></script>
-    </body>
-
-</html>
+   
+</section>
+<input type="hidden" name="id" value="{{recipe.id}}">
+</form>
+<script src="/delet.js"></script>
+{%endblock%}
         
      

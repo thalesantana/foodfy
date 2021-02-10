@@ -1,0 +1,22 @@
+{%extends "Layout.njk" %}
+{%block search%}
+{%endblock%}
+{%block content %}
+        <div>
+            <h3>Gerenciar Chefs</h3>
+        </div>
+            <section class="index-cards">
+
+                {%for chefs in chef%}
+                <div class="chefCard">
+                    <img src="{{chefs.avatar}}" alt="foto de {{chefs.name}}" id="chefImg">
+                    <div class="detailsChef">
+                        <h4>{{chefs.name}}</h4>
+                        <p class=total>{{chef.total_recipes}} receitas</p>
+                    </div>
+                </div> 
+               {%endfor%}  
+                
+            </section>   
+{%endblock%}
+

@@ -8,30 +8,39 @@
     {%endblock%}
     
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/stylePrivate.css">
 </head>
 
 <body >
-     <header class="background">
-            <div class="links">
-                <a href="/" id="logo"><img src="/img/logo.png" alt="Logo"></a>  
+    <header class="background">
+        <div class="links">
+            <a href="/" id="logo"><img src="/img/logo.png" alt="Logo"></a>
+            <div>
                 <a href="/about" id="sobre">Sobre</a>
-                <a href="/recipes-list" id="recipes">Receitas</a>
-                <a href="./admin/recipes" id="privateIndex"><button>Administrar</button></a>
+                <a href="/recipes-list" >Receitas</a>
+                <a href="/chefs">Chefs</a>
             </div>
-            
-        </header>
+            {%block search%}
+                <div class="search">
+                    <form action="/recipes" method="post">
+                        <input id="filterField"type="text" placeholder="Buscar uma Receita" name="filter">
+                        <button class="buscar">Buscar</button>
+                    </form>
+                </div>
+            {%endblock%}
+        </div>
+    </header>
     
     <div class="all">
-       
-        
+    
         {% block content %}
         {% endblock %}   
         
     </div>
-    <footer class="footer">
-        <p class="copyrigth">Todos direitos reservados, receitas Foodfy</p>
-    </footer>
     
+    <div class="footer">
+        <p class="copyrigth">Todos direitos reservados, receitas Foodfy</p>
+    </div>
 </body>
 
 </html>

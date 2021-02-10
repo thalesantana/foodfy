@@ -1,18 +1,31 @@
 {%extends "layout.njk" %}
 
 {%block content %}
-        <div class="description">
+        <div class="bannerCard">
             <img src="/img/chef.png" alt="chef">
             <h1>As melhores receitas</h1>
             <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
         </div>
-        <h2>Nossas Receitas </h2>
         
-            <section class="index-cards">
-                
-               
-                
+        <h2>Mais Acessadas</h2>
+
+            <section >
+                <div class="indexcards">
+                    {%for recipe in RecipeData%}
+                            <div class="indexCard">
+                                <img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="indexRecipeImg">
+                                <div class="indexDetails">
+                                    <h4>{{recipe.title}}</h4>
+                                    {%for chefs in chef%}
+                                        {% if chefs.id == recipe.chef_id %}
+                                           <p>por {{chefs.name}}</p> 
+                                        {% endif %} 
+                                    {%endfor%}  
+                                </div>
+                            </div>                        
+                    {%endfor%}
+                </div>
             </section>
-        
+            
 {%endblock%}
 

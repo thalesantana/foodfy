@@ -1,0 +1,50 @@
+{%extends "privateLayout.njk" %}
+
+{%block content%}
+
+<section class="create"> 
+    <div class='top2'>
+        <h1 id="form-delete" class="createTitle">Editando Chef</h1>
+        <form method="POST" action="/admin/chefs?_method=DELETE" >
+            <button  type="submit" class="delet">Deletar</button>
+            <input type="hidden" name="id" value="{{chef.id}}">
+            <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
+        </form>
+    
+        <form class="form" method="POST" action="/admin/chefs?_method=PUT">
+            <button type="submit" class="save">Salvar Chef</button>
+        
+        <div class="deleteModal active"> 
+            <div class="modal">    
+                <div class="modalitems">
+                    <h3>Não é possivel deletar um chef com receitas cadastradas!</h3>
+                    <div class="close"><a href="/admin/chefs/{{chef.id}}">Fechar</a> </div>
+                </div>
+                 
+            </div>  
+        </div>
+        
+    </div> 
+
+    <h3>Nome</h3>
+    <div>
+        <input 
+            type="text"
+            name = "name"
+            value = "{{chef.name}}"
+        >
+    </div>
+
+    <h3>Avatar</h3>
+    <div>
+        <input 
+            type="url"
+            name = "avatar"
+            value = "{{chef.avatar}}"
+        >
+    </div>
+</section>
+<input type="hidden" name="id" value={{chef.id}}>
+</form>
+<script src="/delet.js"></script>
+{%endblock%}

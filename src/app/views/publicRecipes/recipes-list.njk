@@ -7,16 +7,24 @@
 {%block content %}
         <section class="recipes">
             
-           ---  {%for item in items %}
-                <div class="card" id="{{loop.index0}}">
-                    <div class="img-container" >
-                        <img src="{{item.image}}" alt="Foto de {{item.title}}">
-                        <p class="R-title">{{item.title}}</p>
-                        <p class="S-title">por {{item.author}}</p>
-                    </div>
-                </div> 
-
-            {%endfor%} ---
+           <section >
+                <div class="indexcards">
+                    {%for recipe in RecipeData%}
+                            <div class="indexCard">
+                                <img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="indexRecipeImg">
+                                <div class="indexDetails">
+                                    <h4>{{recipe.title}}</h4>
+                                    {%for chefs in chef%}
+                                        {% if chefs.id == recipe.chef_id %}
+                                           <p>por {{chefs.name}}</p> 
+                                        {% endif %} 
+                                    {%endfor%}  
+                                </div>
+                            </div>                        
+                    {%endfor%}
+                </div>
+            </section>
+            
         </section>
 
 {%endblock%}

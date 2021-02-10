@@ -14,17 +14,14 @@ body{
     position: relative;
     margin: 0 auto;
 }
-.background{
-    background-color: #EEEEEE;
-    padding-top: 31px;
-    padding-bottom: 30px;
-}
+/*////// MENU /////*/
 .links{
-        margin-left: 231px;
+        margin: 28px 231px;
+        width: 940px;
         display: grid;
-        grid-template-columns: 0.226fr 0.08fr 0.50fr 0;
-        max-width: 940px;
+        grid-template-columns: 0fr 2fr 2fr;
         align-items: center;    
+        text-align: center; 
 }
 
 .links #logo{
@@ -37,37 +34,50 @@ body{
     font-size: 16px;
     color: #111111;
 }
-
-#privateIndex button{
-    margin-left: 200px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #eeb0e6;
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-weight: 500;
+.links a:nth-child(2){
+    margin: 0 30px;
 }
-.description{
+.search{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+#filterField{
+    width: 246px;
+    height: 37px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    margin: 0;
+}
+.buscar{
+    width: 91px;
+    height: 37px;
+    background: #6558C3;
+    border-radius: 4px;
+}
+/*//// BANNER ////*/
+.bannerCard{
     height:366px;
-    width: 100%;
+    width: 940px;
     border-radius: 30px;
     background-color: #FBDFDB;
     position: relative;
-    margin-top: 20px;
+    margin-bottom: 50px;
 }
-.description img{
+.bannerCard img{
     left: 624px;  
     top: 66px;  
     position: absolute;
 }
-.description h1{
+.bannerCard  h1{
     size: 32px;
    padding-top: 117px;
    padding-left: 60px;
    padding-bottom: 10px;
    
 }
-.description p{
+.bannerCard  p{
     size: 16px;
     padding-left: 60px;
     padding-right: 564px;
@@ -78,49 +88,41 @@ body{
     height: 84px;
     line-height: 28px;    
 }
-h2{
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-.index-cards{
-    max-width: 100%;
+/*/// INDEX CARDS// /*/
+
+.indexcards{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    padding-top: 20px;
-}
-.card{
-    cursor: pointer;
-}
-.img-container img{
-    width: 100%;
-    
-    border-radius: 20px;
+    row-gap: 30px;
+    margin-bottom: 100px;
+    margin-top: 20px;
 }
 
-.R-title{
-    font-size: 18px;
-    text-decoration: none;
-    padding-top: 20px;   
+#indexRecipeImg{
+    width: 300px;
+    height: 140px;
+    border-radius: 15px;
 }
-.S-title{
+.indexcard{
+    display: grid;
+}
+.recipeCard{
+    display: flex;
+}
+.indexDetails{
+    display: grid;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.indexDetails h4{
+    font-size: 18px;
+    color: #111111;
+ }
+.indexDetails p{
     font-size: 14px;
     color: #777777;
-    padding-top: 5px;
-}
-
-.footer{
-    width: 100%;
-    height: 62px;
-    text-align: center;
-    background-color: #EEEEEE;
-    margin-top: 50px;
-}
-.copyrigth{
-    padding-top: 23px;
-    padding-bottom: 23px;
-    font-size: 14px;
-    color: #999999;
 }
 
 /*////// SOBRE /////*/
@@ -138,73 +140,18 @@ h2{
     line-height: 28px;
 }
 
-/*////// RECEITAS /////*/
-
-.recipes{
-    max-width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    padding-top: 20px;
-    
-    }
-
-
-/* === DETAIL=== */
-
-.recipe{
-    max-width: 940px;
-}
-.recipe img{
-    margin-top: 16px;
-    border-radius: 15px;
-}
-.recipe  h1{
+/*/// FOOTER ///*/
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
-    margin-top: 50px;
-    font-size: 36px;
+    background-color: #EEEEEE;
 }
-.author{
-    text-align: center;
-    padding-top: 4px;
-    font-family: "Roboto-Regular";
-    color: #777777;
-}
-.recipe  h2{
-    font-family: "roboto-bold";
-    font-size: 24px;
-    
-}
-
-.recipe li{
-    font-family: Roboto-Regular;
-    font-size: 18px;
-    color: #444444;
-    line-height: 28px;
-}
-
-.button{
+.copyrigth{
+    padding-top: 23px;
+    padding-bottom: 23px;
+    font-size: 14px;
     color: #999999;
-    font-size: 12px;
-    font-family: Roboto-Bold;
-    align-items: flex-end;
-    padding-left: 8px;
-    cursor: pointer;
 }
-
-.button-line{
-    display: flex;
-    align-items: baseline;
-    
-}
-.hide{
-    display: none;
-}
-
-.show{
-    display: block;
-}
-
-
-
-
