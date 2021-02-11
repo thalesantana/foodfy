@@ -194,6 +194,7 @@ option[value=""][disabled] {
 
 /*////// Show recipe/////*/
 
+.show{margin-bottom: 100px;}
 .recipeImg{
     object-fit:cover;
     border-radius: 15px;

@@ -2,47 +2,36 @@ const data = require('../models/publicRecipeModel')
 
 module.exports={
     index(req,res){
-            data.recipeData(function(RecipeData){
-                data.chefsSelectOptions(function(chef){
-                    return res.render("publicRecipes/index",{RecipeData,chef})
-                })
+        const {filter} = req.query
+        if(filter){
+            data.findBy(function(RecipeData){
+                return res.render("publicRecipes/index",{RecipeData})
+            })
+        } else{
+            data.indexRecipes(function(RecipeData){
+                return res.render("publicRecipes/index",{RecipeData})
             }) 
+        }
+            
     },
     about(req,res){
         return res.render("publicRecipes/about")
     },
-    chefs(req,res){
-        data.chefsSelectOptions(function(options){
-            data.find(req.params.id, function(recipe){
-                return res.render('publicRecipes/chefs',{recipe,chefs:options})
-            })
-        })
-    },
     recipes(req,res){
-        const{filter} = req.query
-        console.log(req.query)
-        if(filter){
-            data.findBy(filter, function(datas){
-                console.log(datas)
-                return res.render("publicRecipes/recipes-list",{datas,RecipeData,chef})
-            })
-        } else{
-            data.recipeData(function(RecipeData){
-                data.chefsSelectOptions(function(chef){
-                    return res.render("publicRecipes/recipes-list",{RecipeData,chef})
-                })
-            })
-        }
-        
+        data.allRecipes(function(RecipeData){
+            return res.render("publicRecipes/recipes-list",{RecipeData})
+        })
     },
     show(req,res){
         data.findRecipe(req.params.id, function(recipe){
             if(!recipe) return res.send("recipe not found!")
-
-            data.chefsSelectOptions(function(options){
                 
-                return res.render('publicRecipes/recipe',{recipe,chefOptions:options})
-            })
+            return res.render('publicRecipes/recipe',{recipe})
         })
     },
+    chefs(req,res){
+        data.allChefs(function(chefs){
+                return res.render('publicRecipes/chefs',{chefs})
+            })
+    }, 
 }

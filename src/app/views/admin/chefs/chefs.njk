@@ -5,12 +5,12 @@
             <h3>Gerenciar Chefs</h3>
         </div>
             <section class="index-cards">
-                {%for chefs in chef%}
+                {%for chef in chefs%}
                 <div class="chefCard">
-                    <img src="{{chefs.avatar}}" alt="foto de {{chefs.name}}" id="chefImg">
+                    <img src="{{chef.avatar}}" alt="foto de {{chef.name}}" id="chefImg">
                     <div class="detailsChef">
-                        <h4>{{chefs.name}}</h4>
-                        <a href="/admin/chefs/{{chefs.id}}">Visualizar</a>
+                        <h4>{{chef.name}}</h4>
+                        <a href="/admin/chefs/{{chef.id}}">Visualizar</a>
                     </div>
                 </div> 
                {%endfor%}  

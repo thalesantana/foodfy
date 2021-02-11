@@ -1,51 +1,54 @@
 const db = require('../../config/db')
 module.exports = {
-    find(id, callback){
-        db.query(`
-        SELECT chefs.*, (SELECT count(*) FROM recipes WHERE recipes.chef_id = $1 ) as total_recipes FROM chefs 
-        LEFT JOIN recipes 
-        ON chefs.id = recipes.chef_id
-        WHERE chefs.id = $1
-        GROUP BY chefs.id `, [id],function(err,results){
-                if(err) throw `Database Error!${err}`
-                
-                //console.log(results.rows)
-                callback(results.rows[0])
+    indexRecipes(callback){
+        db.query(`SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    },
+    allRecipes(callback){
+        db.query(`SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
         })
     },
     findRecipe(id, callback){
         db.query(`
-        SELECT * FROM recipes
-        WHERE recipes.id = $1 `, [id],function(err,results){
+        SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        WHERE recipes.id = $1`, [id],function(err,results){
                 if(err) throw `Database Error!${err}`
                 
                 callback(results.rows[0])
         })
     },
-    chefsSelectOptions(callback){
-        db.query(`SELECT  * FROM chefs`, function(err, results){
-            if(err) throw `Database Error! ${err}`
-          
-            callback(results.rows)
-        })
-    },
-    recipeData(callback){
-        db.query(`SELECT * FROM recipes`, function(err, results){
-            if(err) throw `Database Error! ${err}`
-
-            callback(results.rows)
-        })
-    },
     findBy(filter,callback){
         db.query=(`
-        SELECT  recipes.*, count(recipes) AS total_recipes
+        SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
-        WHERE recipes.title ILIKE '%${filter}%'
-        GROUP BY members.id
-        ORDER BY recipes DESC`, function(err, results){
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        WHERE recipes.title ILIKE '%${filter}%'`, function(err, results){
             if(err) throw `Database Error! ${err}`
 
-            
+            console.log(results.rows)
+            callback(results.rows)
+        })
+    },
+    allChefs(callback){
+        db.query(`SELECT chefs.*, count(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        GROUP BY chefs.id`
+        , function(err, results){
+            if(err) throw `Database Error! ${err}`
+
             callback(results.rows)
         })
     },
