@@ -22,9 +22,9 @@
             </div>
             {%block search%}
                 <div class="search">
-                    <form action="/recipes" method="post">
+                    <form action="/recipeslist" method="GET">
                         <input id="filterField"type="text" placeholder="Buscar uma Receita" name="filter">
-                        <button class="buscar">Buscar</button>
+                        <button type="submit" class="buscar">Buscar</button>
                     </form>
                 </div>
             {%endblock%}

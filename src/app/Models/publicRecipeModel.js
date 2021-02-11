@@ -36,4 +36,17 @@ module.exports = {
             callback(results.rows)
         })
     },
+    findBy(filter,callback){
+        db.query=(`
+        SELECT  recipes.*, count(recipes) AS total_recipes
+        FROM recipes
+        WHERE recipes.title ILIKE '%${filter}%'
+        GROUP BY members.id
+        ORDER BY recipes DESC`, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            
+            callback(results.rows)
+        })
+    },
 }

@@ -7,16 +7,16 @@
         </div>
             <section class="index-cards">
 
-                {%for chefs in chef%}
+                {%for chef in chefs%}
                 <div class="chefCard">
-                    <img src="{{chefs.avatar}}" alt="foto de {{chefs.name}}" id="chefImg">
+                <input type="hidden" name="id" id="{{chef.id}}">
+                    <img src="{{chef.avatar}}" alt="foto de {{chef.name}}" id="chefImg">
                     <div class="detailsChef">
-                        <h4>{{chefs.name}}</h4>
+                        <h4>{{chef.name}}</h4>
                         <p class=total>{{chef.total_recipes}} receitas</p>
                     </div>
                 </div> 
                {%endfor%}  
-                
             </section>   
 {%endblock%}
 
