@@ -19,7 +19,7 @@ module.exports={
         return res.render("publicRecipes/about")
     },
     recipes(req,res){
-        data.allRecipes(function(RecipeData){
+        data.indexRecipes(function(RecipeData){
             return res.render("publicRecipes/recipes-list",{RecipeData})
         })
     },
