@@ -3,10 +3,10 @@ const data = require('../models/publicRecipeModel')
 module.exports={
     index(req,res){
         const {filter} = req.query
-        if(filter){
-            data.findBy(function(RecipeData){
-                console.log(recipeData)
-                return res.render("publicRecipes/index",{RecipeData})
+
+        if( filter ){
+            data.findBy(filter,function(RecipeData){
+                return res.render("publicRecipes/recipes-filter",{RecipeData})
             })
         } else{
             data.indexRecipes(function(RecipeData){

@@ -1,27 +1,27 @@
 {%extends "layout.njk" %}
 
-{%block content %}
-        <div class="bannerCard">
-            <img src="/img/chef.png" alt="chef">
-            <h1>As melhores receitas</h1>
-            <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
-        </div>
-        
-        <h2>Mais Acessadas</h2>
+{%block head%}
+    <title>Receitas - Foodfy</title>
+{%endblock%}
 
-            <section >
+{%block content %}
+        <section class="recipes">
+            
+           <section >
                 <div class="indexcards">
+                <h1>Buscando por {{filter}}</h1>
                     {%for recipe in RecipeData%}
                             <div class="indexCard">
                                 <a href="/recipe/{{recipe.id}}"><img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="indexRecipeImg"></a>
                                 <div class="indexDetails">
                                     <h4>{{recipe.title}}</h4>
-                                    <p>por {{recipe.chef_name}}</p> 
+                                    <p>por {{recipe.chef_name}}</p>   
                                 </div>
                             </div>                        
                     {%endfor%}
                 </div>
             </section>
             
-{%endblock%}
+        </section>
 
+{%endblock%}

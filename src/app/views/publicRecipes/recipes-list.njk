@@ -14,12 +14,7 @@
                                 <a href="/recipe/{{recipe.id}}"><img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="indexRecipeImg"></a>
                                 <div class="indexDetails">
                                     <h4>{{recipe.title}}</h4>
-                                    {%for chefs in chef%}
-                                        {% if chefs.id == recipe.chef_id %}
-                                           <p>por {{chefs.name}}</p> 
-                                        {% endif %} 
-                                    {%endfor%}  
-                                    
+                                           <p>por {{recipe.chef_name}}</p>   
                                 </div>
                             </div>                        
                     {%endfor%}
