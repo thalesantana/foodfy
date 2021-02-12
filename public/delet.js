@@ -1,6 +1,7 @@
-const deletModal = document.querySelector('.deleteModal');
-const button = document.getElementsByClassName("create");
+const total =  document.getElementById("total").value;
 
-button.addEventListener("click",function(){
-    deletModal.classList.add('active')
-})
+function alertclick(){
+        if(total > 0){
+            alert('Não é possivel deletar um chef com receitas cadastradas')
+        }
+}

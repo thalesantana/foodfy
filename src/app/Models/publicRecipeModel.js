@@ -1,4 +1,5 @@
 const db = require('../../config/db')
+
 module.exports = {
     indexRecipes(callback){
         db.query(`SELECT recipes.*, chefs.name AS chef_name
@@ -37,7 +38,7 @@ module.exports = {
         WHERE recipes.title ILIKE '%${filter}%'`, function(err, results){
             if(err) throw `Database Error! ${err}`
 
-            console.log(results.rows)
+
             callback(results.rows)
         })
     },

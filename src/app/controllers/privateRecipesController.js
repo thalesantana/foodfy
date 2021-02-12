@@ -1,16 +1,15 @@
-const {date} = require('../../lib/utils')
 const recipe = require('../models/privateRecipeModel')
 const chef = require('../models/chefsModel')
 module.exports = {
     index(req,res){
-        chef.chefsSelectOptions(function(datas){
-            recipe.recipeData(function(data){
-                return res.render("admin/recipes/recipes",{chef:datas,recipeData:data})
+        chef.allChefs(function(datas){
+            recipe.indexRecipes(function(data){
+                return res.render("admin/recipes/recipes",{chef:datas,indexRecipes:data})
             })
         })
     },
     create(req,res){ 
-        chef.chefsSelectOptions(function(options){
+        chef.allChefs(function(options){
             return res.render('admin/recipes/createRecipe',{chef,chefOptions:options})
         })
     },
@@ -31,17 +30,15 @@ module.exports = {
     show(req,res){
         recipe.find(req.params.id, function(recipe){
             if(!recipe) return res.send("recipe not found!")
-
-            chef.chefsSelectOptions(function(options){
-                return res.render('admin/recipes/showRecipe',{recipe,chefOptions:options})
-            })
+            
+            return res.render('admin/recipes/showRecipe',{recipe})
         })
     },
     edit(req,res){
         recipe.find(req.params.id, function(recipe){
             if(!recipe) return res.send("recipe not found!")
 
-            chef.chefsSelectOptions(function(options){
+            chef.allChefs(function(options){
                 return res.render("admin/recipes/editRecipe", {recipe,chefOptions:options})
             })
         })

@@ -2,6 +2,29 @@ const db = require('../../config/db')
 const {date} = require('../../lib/utils')
 
 module.exports = {
+    allChefs(callback){
+        db.query(`SELECT chefs.*, count(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        GROUP BY chefs.id`
+        , function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    },
+    find(id, callback){
+        db.query(`
+        SELECT chefs.*, (SELECT count(*) FROM recipes WHERE recipes.chef_id = $1 ) as total_recipes FROM chefs 
+        LEFT JOIN recipes 
+        ON chefs.id = recipes.chef_id
+        WHERE chefs.id = $1
+        GROUP BY chefs.id `, [id],function(err,results){
+                if(err) throw `Database Error!${err}`
+                
+                callback(results.rows[0])
+        })
+    },
     create(data,callback){
         const query = `
         INSERT INTO chefs(
@@ -44,31 +67,12 @@ module.exports = {
             callback()
         })
     }, 
-    delete(id, callback){
+    delete(id, callback){    
         db.query(`DELETE FROM chefs WHERE id= $1`, [id],function(err, results){
-            if(err) throw `Database Error! ${err}`
-
-            return callback()
-        })
-    },
-    chefsSelectOptions(callback){
-        db.query(`SELECT  * FROM chefs`, function(err, results){
-            if(err) throw `Database Error! ${err}`
+            if(err) throw `Database Error! ${err}` 
             
-            callback(results.rows)
-        })
-    },
-    find(id, callback){
-        db.query(`
-        SELECT chefs.*, (SELECT count(*) FROM recipes WHERE recipes.chef_id = $1 ) as total_recipes FROM chefs 
-        LEFT JOIN recipes 
-        ON chefs.id = recipes.chef_id
-        WHERE chefs.id = $1
-        GROUP BY chefs.id `, [id],function(err,results){
-                if(err) throw `Database Error!${err}`
-                
-                callback(results.rows[0])
-        })
+            return callback()   
+        })     
     },
 }
 

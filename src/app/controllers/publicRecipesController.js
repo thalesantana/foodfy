@@ -5,6 +5,7 @@ module.exports={
         const {filter} = req.query
         if(filter){
             data.findBy(function(RecipeData){
+                console.log(recipeData)
                 return res.render("publicRecipes/index",{RecipeData})
             })
         } else{

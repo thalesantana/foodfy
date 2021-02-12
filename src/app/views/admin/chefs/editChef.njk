@@ -4,13 +4,17 @@
 
 <section class="create"> 
     <div class='top2'>
-        <h1 id="form-delete" class="createTitle">Editando Chef</h1>
-        <form method="POST" action="/admin/chefs?_method=DELETE" >
-            <button  type="submit" class="delet">Deletar</button>
+        <h1  class="createTitle">Editando Chef</h1>
+        <form  id="form-delete" method="POST" action="/admin/chefs?_method=DELETE" >
+            <script>
+               
+            </script>
+            <button  onclick="alertclick()" type="submit" class="delet">Deletar</button>
+            
             <input type="hidden" name="id" value="{{chef.id}}">
             <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
         </form>
-    
+
         <form class="form" method="POST" action="/admin/chefs?_method=PUT">
             <button type="submit" class="save">Salvar Chef</button>
         
@@ -24,8 +28,7 @@
             </div>  
         </div>
         
-    </div> 
-
+    </div>
     <h3>Nome</h3>
     <div>
         <input 

@@ -67,15 +67,26 @@ module.exports = {
     },
     find(id, callback){
         db.query(`
-        SELECT * FROM recipes
-        WHERE recipes.id = $1 `, [id],function(err,results){
+        SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        WHERE recipes.id = $1`, [id],function(err,results){
                 if(err) throw `Database Error!${err}`
                 
                 callback(results.rows[0])
         })
     },
-    recipeData(callback){
+    /*recipeData(callback){
         db.query(`SELECT * FROM recipes`, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    },*/
+    indexRecipes(callback){
+        db.query(`SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`, function(err, results){
             if(err) throw `Database Error! ${err}`
 
             callback(results.rows)
