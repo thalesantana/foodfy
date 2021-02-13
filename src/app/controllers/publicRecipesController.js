@@ -1,27 +1,33 @@
-const data = require('../models/publicRecipeModel')
+const data = require('../Models/publicRecipeModel')
 
 module.exports={
-    index(req,res){
-        const {filter} = req.query
+    home(req,res){
+        const { filter } = req.query
 
-        if( filter ){
+        if(filter){
             data.findBy(filter,function(RecipeData){
-                return res.render("publicRecipes/recipes-filter",{RecipeData})
+                return res.render('publicRecipes/recipes-list',{ filter,RecipeData })
             })
         } else{
             data.indexRecipes(function(RecipeData){
-                return res.render("publicRecipes/index",{RecipeData})
+                return res.render('publicRecipes/index',{ RecipeData })
             }) 
-        }
-            
+        }     
     },
     about(req,res){
         return res.render("publicRecipes/about")
     },
     recipes(req,res){
-        data.indexRecipes(function(RecipeData){
-            return res.render("publicRecipes/recipes-list",{RecipeData})
-        })
+        const { filter } = req.query
+        if( filter ){
+            data.findBy(filter,function(RecipeData){
+                return res.render('publicRecipes/recipes-list',{ filter,RecipeData })
+            })
+        } else{
+            data.indexRecipes(function(RecipeData){
+                return res.render('publicRecipes/recipes-list',{ RecipeData })
+            }) 
+        } 
     },
     show(req,res){
         data.findRecipe(req.params.id, function(recipe){

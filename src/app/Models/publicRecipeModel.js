@@ -21,16 +21,18 @@ module.exports = {
                 callback(results.rows[0])
         })
     },
-    findBy(filter,callback){
-        db.query=(`
-        SELECT recipes.*, chefs.name AS chef_name
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE recipes.title ILIKE '%${filter}%'`, function(err, results){
-            if(err) throw `Database Error! ${err}`
-
-
-            callback(results.rows)
+    findBy(filter, callback) {
+        db.query(`
+          SELECT recipes.*, chefs .name AS chef_name
+          FROM recipes
+          LEFT JOIN chefs ON (recipes.chef_id =  chefs.id)
+          WHERE recipes.title ILIKE '%${filter}%'
+          OR chefs.name ILIKE '%${filter}%'
+          GROUP BY recipes.id, chefs.name
+          `, function(err, results) {
+          if(err) throw `Database error! + ${err}`
+          
+          callback(results.rows)
         })
     },
     allChefs(callback){

@@ -6,6 +6,9 @@
 
 {%block content %}
         <section class="recipes">
+        {%if filter%}
+            <h1 class="find">Buscando por "{{filter}}"</h1>
+        {%endif%}
             
            <section >
                 <div class="indexcards">

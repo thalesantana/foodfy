@@ -6,9 +6,7 @@ const chefs = require('../app/controllers/chefsController')
 const publicRecipes = require('../app/controllers/publicRecipesController')
 
 // PUBLIC ROUTES
-routes.get('/',function(req,res){return res.redirect("/index")})
-routes.get('/index', publicRecipes.index);
-routes.get("/recipe", publicRecipes.index)
+routes.get('/',publicRecipes.home)
 routes.get('/about', publicRecipes.about);
 routes.get('/recipeslist', publicRecipes.recipes);// Exibir detalhes de uma receita
 routes.get("/recipe/:id", publicRecipes.show); // Mostrar a lista de receitas

@@ -22,8 +22,8 @@
             </div>
             {%block search%}
                 <div class="search">
-                    <form action="/recipe" method="GET">
-                        <input id="filterField"type="text" placeholder="Buscar uma Receita" name="filter">
+                    <form action="/recipeslist" method="GET">
+                        <input id="filterField"type="text" placeholder="Buscar uma Receita" name="filter" value="{{filter}}">
                         <button type="submit" class="buscar">Buscar</button>
                     </form>
                 </div>
