@@ -1,9 +1,12 @@
 {%extends "privateLayout.njk" %}
 
 {%block content %}
-        <div class="description">
-            <h3>Gerenciar Chefs</h3>
-        </div>
+        <form action="/admin/chefs/createchef" method="get">
+            <div class="description">
+                <h3>Gerenciar Chefs</h3>
+                <button type="" class="save">Adicionar Chef</button>
+            </div>
+        </form>
             <section class="index-cards">
                 {%for chef in chefs%}
                 <div class="chefCard">

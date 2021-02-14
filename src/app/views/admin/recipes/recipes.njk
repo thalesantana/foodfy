@@ -1,9 +1,12 @@
 {%extends "privateLayout.njk" %}
 
 {%block content %}
+    <form action="/admin/recipes/create" method="get">
         <div class="description">
             <h3>Gerenciar Receitas</h3>
+            <button  type="submit" class="save">Nova Receita</button>
         </div>
+    </form>
             <div class="recipesCard">
                 {%for recipe in indexRecipes%}
                    

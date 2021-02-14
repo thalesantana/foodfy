@@ -15,8 +15,20 @@ body{
     margin: 0 auto;
 }
 /*////// MENU /////*/
+.adm{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 940px;
+    margin: 5px 231px;
+}
+.adm button{
+    width: 91px;
+    height: 37px;
+    background-color: #FBDFDB;
+    font-size: 16px;
+}
 .links{
-        margin: 28px 231px;
+        margin: 0  231px 28px 231px;
         width: 940px;
         display: grid;
         grid-template-columns: 0fr 2fr 2fr;
