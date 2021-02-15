@@ -46,6 +46,6 @@ npm start
 to start the development server.
 
 ## :key: Administrative Area
-To get into the administrative area, click on the pink button "administrar" in the index page or access `http://localhost:3000/admin`.
+To get into the administrative area,and create new chefs or recipes click on the pink button "administrar" in the index page or access `http://localhost:3000/admin`.
 
 
