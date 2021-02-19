@@ -17,7 +17,9 @@
 * 🔎 Search recipes or chefs.
 * 🔧 Create, edit and delet chefs or recipes.
 ##  🔭 Future Features
-* 🔐Create Login and password to adminstrative page.
+* 📁 Dynamic Images upload
+* 📖 Images Gallery
+* 🔐 Create Login and password to adminstrative page.
 * 🌏 Multi language support - English and Portuguese.
 
 ## :arrow_forward: Getting Started
