@@ -11,7 +11,7 @@
                 {%for recipe in indexRecipes%}
                    
                         <div class="recipeCard">
-                            <img src="{{recipe.image}}" alt="foto de {{recipe.title}}" id="recipeImg">
+                            <img src="{{file[0].src}}" alt="foto de {{recipe.title}}" id="recipeImg">
                             <div class="details">
                                 <h4>{{recipe.title}}</h4>
                                 {%for chefs in chef%}

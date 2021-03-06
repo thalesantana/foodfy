@@ -1,12 +1,36 @@
-    <h3>Imagem da Receita</h3>
-    <div>
-        <input 
-            type="url"
-            name = "image"
-            value = "{{recipes.image}}"
-        >
-    </div>
+<section>
+    <h3>Fotos</h3>
+    <div class = "item">
+        <div class="photos-upload">
+            <i class="material-icons" >add</i>
+            <input id="photos-input" 
+                type="file" 
+                name="photos" 
+                multiple
+                accept="image/*"
+                onchange="PhotosUpload.handleFileInput(event)"
+            >   
+        </div>
+        
+        <div id="photos-preview">
+            {% if files %}
+                
+                {%for image in files%}
+                    <div class="photo" id="{{image.id}}">
+                        <i class="material-icons"
+                            onclick="PhotosUpload.removeOldPhoto(event)"
+                         > close</i> 
+                        <img src="{{image.src}}" alt="{{image.name}}">
+                    </div>
+                    
+                {%endfor%}
+            <input type="hidden" name="removed_files">    
+            {% endif %}
+        </div>
 
+            
+        
+    </div>
     <h3>Nome da Receita</h3>
     <div>
         <input 
@@ -38,7 +62,7 @@
     </div>
     <div type="button"  class="add-ingredient">Adicionar novo ingrediente</div>
 
-<h3>Modo de preparo</h3>
+    <h3>Modo de preparo</h3>
     <div id="preparations">
                 <div class="preparation">
                     <input 

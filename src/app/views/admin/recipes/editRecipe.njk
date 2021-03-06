@@ -5,12 +5,12 @@
 <section class="create"> 
     <div class='top2'>
         <h1 id="form-delete" class="createTitle">Editando Receita</h1>
-        <form method="POST" action="/admin/recipes?_method=DELETE" >
+        <form method="POST" action="/admin/recipes?_method=DELETE" enctype="multipart/form-data">
             <button  type="submit" class="delet">Deletar</button>
             <input type="hidden" name="id" value="{{recipe.id}}">
             <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
         </form>
-        <form class="form" method="POST" action="/admin/recipes?_method=PUT">
+        <form class="form" method="POST" action="/admin/recipes?_method=PUT" >
             <button type="submit" class="save">Salvar Chef</button>
         </div> 
 

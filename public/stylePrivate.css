@@ -282,3 +282,98 @@ option[value=""][disabled] {
     grid-template-columns: 1fr 0fr;
     align-items: center;
 }
+
+/*/// UPLOAD DE IMAGENS ///*/
+.item{
+    display: grid;
+    grid-template-columns: 0fr 1fr;
+    grid-gap:8px;
+    width: 100%;
+    margin: 8px 0;
+}
+.photos-upload{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 152px;
+    height: 152px;
+    margin-bottom: 30.5px;
+}
+
+.photos-upload  i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 28px;
+    color: #777777;
+    width: 149px;
+    height: 149px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3.5px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#photos-input{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    
+    cursor: pointer;
+}
+.teste{
+    position: absolute;
+}
+#photos-preview{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap:8px;
+    width: 100%;
+    
+}
+
+#photos-preview img{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 3.5px;
+    object-fit: cover;
+}
+
+#photos-preview .photo{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 152px;
+    height: 152px;
+}
+ .photo i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #DDDDDD;
+    color: red;
+    font-size: 39.6px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+#photos-preview .photo i:hover {
+    opacity: 0.50;
+}
+
+
+/*// CREATE CHEF ///*/
+

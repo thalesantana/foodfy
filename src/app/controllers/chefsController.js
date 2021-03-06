@@ -1,24 +1,35 @@
-const data = require('../models/chefsModel');
+const Chef = require('../models/chefsModel');
 const recipe = require('../models/privateRecipeModel')
+const File = require('../Models/fileModel');
+//const { resolve } = require('node:path');
+//const { resolve } = require('node:path');
 
 module.exports = {
     index(req,res){
-        data.allChefs(function(chefs){
+        Chef.allChefs(function(chefs){
             return res.render('admin/chefs/chefs',{chefs})
         })
     },
-    show(req,res){
-        data.find(req.params.id, function(chef){
-            if(!chef) return res.send("chef not found!")
-            recipe.indexRecipes(function(data){
-                    return res.render('admin/chefs/showChef',{chef,recipeData:data})
-                })           
-        })
+    async show(req,res){
+        let results = await Chef.find(req.params.id)
+        const chefs = results.rows[0]
+        //let Chef = await recipe.indexRecipes()
+
+        if(!chefs) return res.send("chef not found!")
+
+        results = await Chef.files(chefs.id)
+        const files = results.rows.map(file =>({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+        }))
+        
+        return res.render('admin/chefs/showChef',{chefs,files})
+    
     },
     create(req,res){ 
             return res.render('admin/chefs/createchef')
     },
-    post(req,res){
+    async post(req,res){
         const keys= Object.keys(req.body) // retorna chave de todos vetores
 
         for(key of keys){
@@ -26,14 +37,22 @@ module.exports = {
                 return res.send("Please, fill all fields!")
             }
         }
-        
-        data.create(req.body, function(chef){
-            return res.redirect(`/admin/chefs/${chef.id}`)
+        if(req.files.length == 0)
+            return res.send('please, send at least one image!')
+
+        const file = await File.create({
+            filename: req.files[0].filename,
+            path: req.files[0].path
         })
+        file_id = file.rows[0].id
         
+        let results = await Chef.create(req.body,file_id)
+        const chefId = results.rows[0].id
+
+        return res.redirect(`/admin/chefs/${chefId}`)
     },
     edit(req,res){
-        data.find(req.params.id, function(chef){
+        Chef.find(req.params.id, function(chef){
             if(!chef) return res.send("chef not found!")
 
             return res.render("admin/chefs/editChef", {chef})
@@ -48,18 +67,18 @@ module.exports = {
                 return res.send("Please, fill all fields!")
             }
         }
-        data.update(req.body, function(){
+        Chef.update(req.body, function(){
             return res.redirect(`/admin/chefs/${req.body.id}`)
         })
     },
     delete(req, res){
         const id =  req.body.id
         if(req.body.total_recipes == 0){
-            data.delete(req.body.id, function(){
+            Chef.delete(req.body.id, function(){
                     return res.redirect(`/admin/chefs`)
             })  
         }else{
-            data.find(id, function(chef){
+            Chef.find(id, function(chef){
                 
                 if(!chef) return res.send("chef not found!")
                 return res.render("admin/chefs/editChef", {chef})

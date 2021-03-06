@@ -10,7 +10,7 @@
             <section class="index-cards">
                 {%for chef in chefs%}
                 <div class="chefCard">
-                    <img src="{{chef.avatar}}" alt="foto de {{chef.name}}" id="chefImg">
+                    <img src="{{files.path}}" alt="foto de {{chef.name}}" id="chefImg">
                     <div class="detailsChef">
                         <h4>{{chef.name}}</h4>
                         <a href="/admin/chefs/{{chef.id}}">Visualizar</a>
