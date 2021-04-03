@@ -114,7 +114,13 @@ const ImageGallery = {
         
 }
 
+input    = document.getElementById('input-file'),
+fileName = document.getElementById('file-name');
 
+input.addEventListener('change', function(){
+  fileName.textContent = this.value;
+  fileName.style.display = "flex"
+});
 
 /*
 const buttons = document.querySelectorAll(".button")

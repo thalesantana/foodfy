@@ -329,9 +329,7 @@ option[value=""][disabled] {
     
     cursor: pointer;
 }
-.teste{
-    position: absolute;
-}
+
 #photos-preview{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -376,4 +374,33 @@ option[value=""][disabled] {
 
 
 /*// CREATE CHEF ///*/
-
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+#file-name{
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    height: 49px;
+    width: 940px;
+    margin-bottom: 30px;
+    align-items: center;
+    display: none;
+}
+input[type='file'] {
+    display: none
+  }
+  
+.send-avatar{
+    position: relative;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    color: #ffffff;
+    background-color: #6558C3;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

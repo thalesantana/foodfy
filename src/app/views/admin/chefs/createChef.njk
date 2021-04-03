@@ -18,12 +18,16 @@
     </div>
 
     <h3>Avatar</h3>
-    <div id="chef-photo">
-        <input 
-            type="file"
-            name = "photos"
-            accept="image/*"
-        >
+
+    <div class='input-wrapper'>
+        
+        <span id='file-name' ></span>
+        
+        <label class="send-avatar" for='input-file'>
+            Enviar Avatar
+        </label>
+        <input id='input-file' type='file' name="photos" accept="image/*" onchange="PhotosUpload.handleFileInput(event)"/>
+        
     </div>
 </section>
 {%endblock%}
