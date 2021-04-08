@@ -6,12 +6,33 @@
 
 {%block content %}
 <section class="show"> 
+
     <div class='top'>
         <h1 class="showTitle">Receita:{{recipe.title}}</h1>
         <a class = "editRecipe" href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
     </div> 
+    
+    
+    <div class ="gallery">
 
-    <div><img src="{{files[0].src}}" alt="imagem {{recipe.title}}" class="recipeImg"></div>
+        <div class="highlight">
+            <img src="{{files[0].src}}" alt="imagem {{files[0].NAME}}" class="recipeImg">
+        </div>
+
+        <div class="gallery-preview">
+            {%for image in files%}
+                <img 
+                    src="{{image.src}}" 
+                    alt="{{image.name}}"
+                    {% if loop.index0 == 0 %}
+                        class="active"
+                    {%endif%}
+                    onclick="ImageGallery.setImage(event)"
+                >   
+            {%endfor%}
+        </div>
+
+    </div>
 
     <div class="middle">
         <h3 id="title">{{recipe.title}}</h3>
@@ -19,16 +40,16 @@
     </div>
     
 
-<h3 class="steps">Igredientes</h3>
+    <h3 class="steps">Igredientes</h3>
     <div class="textArea">
-            {%for item in recipe.ingredients%}
-                <div >
-                    -{{item}};
-                </div>
-            {%endfor%} 
-        </div>
+        {%for item in recipe.ingredients%}
+            <div >
+                -{{item}};
+            </div>
+        {%endfor%} 
+    </div>
 
-<h3 class="steps">Modo de preparo</h3>
+    <h3 class="steps">Modo de preparo</h3>
     <div class="textArea">
         {%for item in recipe.preparation%}
             <div >
@@ -36,7 +57,7 @@
             </div>
         {%endfor%} 
     </div>
-    
+        
 
     <h3 class="steps">Informações Adicionais</h3>
     <div class="textArea" >
@@ -44,4 +65,5 @@
     </div>
 
 </section> 
+
 {%endblock%}

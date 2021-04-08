@@ -109,7 +109,6 @@ const ImageGallery = {
         target.classList.add('active')
 
         ImageGallery.highlight.src = target.src
-        LightBox.image.src = target.src
     }    
         
 }
@@ -121,6 +120,9 @@ input.addEventListener('change', function(){
   fileName.textContent = this.value;
   fileName.style.display = "flex"
 });
+
+
+
 
 /*
 const buttons = document.querySelectorAll(".button")
