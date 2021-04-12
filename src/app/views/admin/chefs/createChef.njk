@@ -1,7 +1,7 @@
 {%extends "privateLayout.njk" %}
 
 {%block content%}
-<form class="form" method="POST" action="/admin/chefs">
+<form class="form" method="POST" action="/admin/chefs" enctype="multipart/form-data">
 <section class="create"> 
 <div class='top'>
     <h1 class="createTitle">Criando Chef</h1>
@@ -18,12 +18,16 @@
     </div>
 
     <h3>Avatar</h3>
-    <div>
-        <input 
-            type="url"
-            name = "avatar"
-            value = "{{chefs.avatar}}"
-        >
+
+    <div class='input-wrapper'>
+        
+        <span id='file-name' ></span>
+        
+        <label class="send-avatar" for='input-file'>
+            Enviar Avatar
+        </label>
+        <input id='input-file' type='file' name="photos" accept="image/*" onchange="PhotosUpload.handleFileInput(event)"/>
+        
     </div>
 </section>
 {%endblock%}

@@ -152,13 +152,7 @@ option[value=""][disabled] {
 /*////// Show recipe/////*/
 
 .show{margin-bottom: 100px;}
-.recipeImg{
-    object-fit:cover;
-    border-radius: 15px;
-    margin-bottom: 50px;
-    width: 940px;
-    height: 280px;
-}
+
 .middle{
     position: relative;
     text-align: center;
@@ -281,4 +275,161 @@ option[value=""][disabled] {
     display: grid;
     grid-template-columns: 1fr 0fr;
     align-items: center;
+}
+
+/*/// UPLOAD DE IMAGENS ///*/
+.item{
+    display: grid;
+    grid-template-columns: 0fr 1fr;
+    grid-gap:8px;
+    width: 100%;
+    margin: 8px 0;
+}
+.photos-upload{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 152px;
+    height: 152px;
+    margin-bottom: 30.5px;
+}
+
+.photos-upload  i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 28px;
+    color: #777777;
+    width: 149px;
+    height: 149px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3.5px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#photos-input{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    
+    cursor: pointer;
+}
+
+#photos-preview{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap:8px;
+    width: 100%;
+    
+}
+
+#photos-preview img{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 3.5px;
+    object-fit: cover;
+}
+
+#photos-preview .photo{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 152px;
+    height: 152px;
+}
+ .photo i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #DDDDDD;
+    color: red;
+    font-size: 39.6px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+#photos-preview .photo i:hover {
+    opacity: 0.50;
+}
+
+
+/*// CREATE CHEF ///*/
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+#file-name{
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    height: 49px;
+    width: 940px;
+    margin-bottom: 30px;
+    align-items: center;
+    display: none;
+}
+input[type='file'] {
+    display: none
+  }
+  
+.send-avatar{
+    position: relative;
+    font-size: 16px;
+    width: 139px;
+    height: 37px;
+    color: #ffffff;
+    background-color: #6558C3;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+
+/*// GALLERY RECIPE ///*/
+.show .gallery{
+    width: 100%;
+}
+.highlight > img{
+    object-fit:cover;
+    border-radius: 15px;
+    width: 100%;
+    height: 280px;
+}
+
+.gallery-preview{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.gallery-preview img{
+    height: 49.7px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 3.5px;    
+    opacity: 0.6;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.gallery-preview img:hover,
+.gallery-preview img.active{
+    opacity: 1;
 }

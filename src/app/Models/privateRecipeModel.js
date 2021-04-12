@@ -2,22 +2,20 @@ const {date} = require('../../lib/utils')
 const db = require('../../config/db')
 
 module.exports = {
-    create(data,callback){ 
+    async create(data){ 
         const query = `
             INSERT INTO recipes(
                chef_id,
-               image,
                title,
                ingredients,
                preparation,
                information,
                created_at
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+            ) VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id
         `
         const values = [ 
             data.chef_id,
-            data.image,
             data.title,
             data.ingredients,
             data.preparation,
@@ -25,11 +23,8 @@ module.exports = {
             date(Date.now()).iso
         ]
         
-        db.query(query, values, function(err, results){
-            if(err) throw `Database Error!${err}`
-
-            callback(results.rows[0])
-        })
+        const results = await db.query(query,values)
+        return results.rows[0].id
    },
    update(data, callback){
         const query = `
@@ -65,24 +60,13 @@ module.exports = {
             return callback()
         })
     },
-    find(id, callback){
-        db.query(`
+    find(id){
+      return db.query(`
         SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE recipes.id = $1`, [id],function(err,results){
-                if(err) throw `Database Error!${err}`
-                
-                callback(results.rows[0])
-        })
+        WHERE recipes.id = $1`, [id])
     },
-    /*recipeData(callback){
-        db.query(`SELECT * FROM recipes`, function(err, results){
-            if(err) throw `Database Error! ${err}`
-
-            callback(results.rows)
-        })
-    },*/
     indexRecipes(callback){
         db.query(`SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
@@ -91,5 +75,35 @@ module.exports = {
 
             callback(results.rows)
         })
+    },
+    async files(id){
+        try {
+            const query = `
+              SELECT * FROM files
+              LEFT JOIN recipes_files ON (recipes_files.file_id = files.id)
+              WHERE recipes_files.recipe_id = ${id}
+            `
+            
+            const results = await db.query(query)
+            //console.log(results.rows)
+            return results
+          } 
+          catch (err) {
+            console.error(err)
+          }
+    },
+    async allFiles(){
+        try {
+            const query = `
+              SELECT * FROM files
+              LEFT JOIN recipes_files ON (recipes_files.file_id = files.id)`
+            
+            const results = await db.query(query)
+            //console.log(results.rows)
+            return results
+          } 
+          catch (err) {
+            console.error(err)
+          }
     },
 }
