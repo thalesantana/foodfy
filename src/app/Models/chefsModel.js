@@ -11,7 +11,7 @@ module.exports = {
         , function(err, results){
             if(err) throw `Database Error! ${err}`
 
-            callback(results.rows)
+             callback(results.rows)
         })
     },
     find(id){

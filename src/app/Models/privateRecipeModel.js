@@ -61,7 +61,7 @@ module.exports = {
         })
     },
     find(id){
-      return  db.query(`
+      return db.query(`
         SELECT recipes.*, chefs.name AS chef_name
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)

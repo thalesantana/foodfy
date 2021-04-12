@@ -56,14 +56,17 @@ module.exports = {
 
         return res.render('admin/recipes/showRecipe',{recipe, files})
     },
-    edit(req,res){
-        Recipes.find(req.params.id, function(Recipes){
-            if(!Recipes) return res.send("Recipes not found!")
+    async edit(req,res){
+        let results = await Recipes.find(req.params.id)
+        const  recipe = results.rows[0]   
 
-            chef.allChefs(function(options){
-                return res.render("admin/recipes/editRecipe", {Recipes,chefOptions:options})
-            })
+        if(!recipe) return res.send("Recipes not found!")
+        
+        chef.allChefs(function(options){
+            return res.render("admin/recipes/editRecipe", {recipe,chefOptions:options})
         })
+            
+       
     },
     
     put(req,res){
