@@ -3,16 +3,12 @@ const recipe = require('../models/privateRecipeModel')
 const File = require('../Models/fileModel');
 
 module.exports = {
-     index(req,res){
-        Chef.allChefs( async function(chefs){
-            const results = await Chef.files()
-            
-            const files = results.rows.map(file =>({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-            }))
-            return res.render('admin/chefs/chefs',{chefs,files})
-        })
+    async  index(req,res){
+        let results = await Chef.allChefs()
+        const chefs = results.rows
+
+        return res.render('admin/chefs/chefs',{chefs})
+       
     },
     async show(req,res){
         let results = await Chef.find(req.params.id)

@@ -13,8 +13,7 @@
         </div>
         
         <div id="photos-preview">
-            {% if files %}
-                
+              {% if files %}  
                 {%for image in files%}
                     <div class="photo" id="{{image.id}}">
                         <i class="material-icons"
@@ -24,12 +23,9 @@
                     </div>
                     
                 {%endfor%}
-            <input type="hidden" name="removed_files">    
+                <input type="hidden" name="removed_files">    
             {% endif %}
         </div>
-
-            
-        
     </div>
     <h3>Nome da Receita</h3>
     <div>

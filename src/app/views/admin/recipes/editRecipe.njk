@@ -12,16 +12,35 @@
         </form>
         <form class="form" method="POST" action="/admin/recipes?_method=PUT">
             <button type="submit" class="save">Salvar Chef</button>
-        </div> 
-
+    </div> 
         <h3>Imagem da Receita</h3>
-    <div>
-        <input 
-            type="url"
-            name = "image"
-            value = "{{recipe.image}}"
-        >
-    </div>
+        <div class = "item">
+
+            <div class="photos-upload">
+                <i class="material-icons" >add</i>
+                <input id="photos-input" 
+                    type="file" 
+                    name="photos" 
+                    multiple
+                    accept="image/*"
+                    onchange="PhotosUpload.handleFileInput(event)"
+                >   
+            </div>
+
+            <div id="photos-preview">
+                {% if files %}  
+                    {%for image in files%}
+                        <div class="photo" id="{{image.id}}">
+                            <img src="{{image.src}}" alt="{{image.name}}">
+                            <i class="material-icons"
+                                onclick="PhotosUpload.removeOldPhoto(event)"
+                            > close</i> 
+                        </div>  
+                    {%endfor%}
+                    <input type="hidden" name="removed_files">    
+                {% endif %}
+            </div>
+        </div>
 
     <h3>Nome da Receita</h3>
     <div>
@@ -44,30 +63,30 @@
         </select>
     </div>
 
-<h3>Igredientes</h3>
-    <div id="ingredients">
-        {%if recipe.ingredients%}
-            {%for item in recipe.ingredients%}
+    <h3>Igredientes</h3>
+        <div id="ingredients">
+            {%if recipe.ingredients%}
+                {%for item in recipe.ingredients%}
+                    <div class="ingredient">
+                        <input 
+                            type="text"
+                            name = "ingredients"
+                            value="{{item}}"                  
+                    </div>
+                {%endfor%}    
+            {%else%}
                 <div class="ingredient">
-                    <input 
-                        type="text"
-                        name = "ingredients"
-                        value="{{item}}"                  
-                </div>
-            {%endfor%}    
-        {%else%}
-            <div class="ingredient">
-                    <input 
-                        type="text"
-                        name = "ingredients"
-                        value="{{item}}" 
-                    >
-                </div>
-        {%endif%}
-    </div>
-    <div type="button"  class="add-ingredient">Adicionar novo ingrediente</div>
+                        <input 
+                            type="text"
+                            name = "ingredients"
+                            value="{{item}}" 
+                        >
+                    </div>
+            {%endif%}
+        </div>
+        <div type="button"  class="add-ingredient">Adicionar novo ingrediente</div>
 
-<h3>Modo de preparo</h3>
+    <h3>Modo de preparo</h3>
     <div id="preparations">
         {%if recipe.preparation%}
             {%for item2 in recipe.preparation%}
@@ -101,7 +120,6 @@
 
 </section> 
    
-</section>
 <input type="hidden" name="id" value="{{recipe.id}}">
 </form>
 <script src="/delet.js"></script>

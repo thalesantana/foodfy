@@ -15,11 +15,6 @@ module.exports ={
              path
          ]           
          return db.query(query, values)
-         // const filesid = await db.query(query, values)
-        // return filesid.rows[0]
-       //return id
-
-         
     },
      async delete(id){
 

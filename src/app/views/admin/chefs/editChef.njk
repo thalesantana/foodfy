@@ -28,16 +28,17 @@
         >
     </div>
 
-    <h3>Avatar</h3>
-    <div>
-        <input 
-            type="url"
-            name = "avatar"
-            value = "{{chef.avatar}}"
-        >
+     <h3>Avatar</h3>
+
+    <div class='input-wrapper'>
+        
+        <span id='file-name' ></span>
+        
+        <label class="send-avatar" for='input-file'>
+            Enviar Avatar
+        </label>
+        <input id='input-file' type='file' name="photos" accept="image/*" onchange="PhotosUpload.handleFileInput(event)"/>
+        
     </div>
 </section>
-<input type="hidden" name="id" value={{chef.id}}>
-</form>
-<script src="/delet.js"></script>
 {%endblock%}
