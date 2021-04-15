@@ -48,11 +48,11 @@ body{
     padding-top:50px;
     padding-bottom: 20px;
     display: grid;
-    grid-template-columns: 6fr 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 6fr 1fr 1fr; 
     width: 940px;
-    
+    align-items: center;
 }
+
 .createTitle{
     font-style: bold;
     font-size: 24px;
@@ -431,5 +431,29 @@ input[type='file'] {
 
 .gallery-preview img:hover,
 .gallery-preview img.active{
+    opacity: 1;
+}
+
+/*// GALLERY RECIPE EDIT ///*/
+.gallery-put{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.gallery-put img{
+    height: 49.7px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 3.5px;    
+    opacity: 0.6;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.gallery-put img:hover,
+.gallery-put img.active{
     opacity: 1;
 }
