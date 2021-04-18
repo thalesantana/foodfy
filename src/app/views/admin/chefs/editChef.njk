@@ -5,7 +5,7 @@
 <section class="create"> 
     <div class='top2'>
         <h1  class="createTitle">Editando Chef</h1>
-        <form  id="form-delete" method="POST" action="/admin/chefs?_method=DELETE" enctype="multipart/form-data">
+        <form  id="form-delete" method="POST" action="/admin/chefs?_method=DELETE" >
             <script>
                
             </script>
@@ -15,7 +15,8 @@
             <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
         </form>
 
-        <form class="form" method="POST" action="/admin/chefs?_method=PUT">
+               
+        <form class="form" method="POST" action="/admin/chefs?_method=PUT" >
             <button type="submit" class="save">Salvar Chef</button>
         
     </div>

@@ -13,17 +13,20 @@ module.exports = {
     async show(req,res){
         let results = await Chef.find(req.params.id)
         const chefs = results.rows[0]
-        //let Chef = await recipe.indexRecipes()
 
         if(!chefs) return res.send("chef not found!")
 
-        results = await Chef.files(chefs.id)
-        const files = results.rows.map(file =>({
+        results = await recipe.findByChef(chefs.id)
+        const recipeData = results.rows
+
+        results = await Chef.files(chefs.file_id)
+        let files = results.rows
+        files = files.map(file =>({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
         }))
-        
-        return res.render('admin/chefs/showChef',{chefs,files})
+        //console.log(recipeData)
+        return res.render('admin/chefs/showChef',{chefs,files, recipeData})
     
     },
     create(req,res){ 
@@ -52,12 +55,13 @@ module.exports = {
 
         return res.redirect(`/admin/chefs/${chefId}`)
     },
-    edit(req,res){
-        Chef.find(req.params.id, function(chef){
-            if(!chef) return res.send("chef not found!")
+    async edit(req,res){
+        let results =  await Chef.find(req.params.id);
+        const chef = results.rows[0]
 
-            return res.render("admin/chefs/editChef", {chef})
-        })
+        
+        return res.render("admin/chefs/editChef", {chef})
+       
     },
     put(req,res){
         const keys= Object.keys(req.body) // retorna chave de todos vetores

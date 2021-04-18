@@ -12,10 +12,7 @@ module.exports = {
     find(id){
        return db.query(`
         SELECT chefs.*, (SELECT count(*) FROM recipes WHERE recipes.chef_id = $1 ) as total_recipes 
-        FROM chefs 
-        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-        LEFT JOIN files ON  (chefs.file_id =  files.id)
-        WHERE chefs.id = $1
+        FROM chefs WHERE chefs.id = $1
         GROUP BY chefs.id `, [id])
     },
     create(data,file_id){

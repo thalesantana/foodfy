@@ -8,9 +8,7 @@ body{
 }
 .content{
     max-width: 940px;
-    padding: 0 230px;
-    position: relative;
-    margin-right: 0;
+    margin: 0 230px;
 }
 .backgroundCreate{
     background-color: #111111;
@@ -289,7 +287,7 @@ option[value=""][disabled] {
     position: relative;
     display: block;
     overflow: hidden;
-    width: 152px;
+    width: 151px;
     height: 152px;
     margin-bottom: 30.5px;
 }
@@ -344,7 +342,7 @@ option[value=""][disabled] {
     position: relative;
     display: block;
     overflow: hidden;
-    width: 152px;
+    width: 151px;
     height: 152px;
 }
  .photo i {

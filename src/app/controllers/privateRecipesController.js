@@ -1,7 +1,7 @@
 const Recipes = require('../models/privateRecipeModel')
 const chef = require('../models/chefsModel')
 const File = require('../Models/fileModel')
-
+const  alert = require('node-popup').alert 
 
 module.exports = {
     async index(req,res){
@@ -55,49 +55,58 @@ module.exports = {
         
         results = await Recipes.files(recipe.id)
         let files = results.rows
+        
         files = files.map(file =>({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
         }))
-
+   
         return res.render('admin/recipes/showRecipe',{recipe, files})
     },
     async edit(req,res){
         let results = await Recipes.find(req.params.id)
-        const  recipe = results.rows[0]   
-
-        if(!recipe) return res.send("Recipes not found!")
+        const  recipes = results.rows[0]   
+        
+        if(!recipes) return res.send("Recipes not found!")
         
         //get chefs
         const result =  await chef.allChefs()
         const chefOptions = result.rows
         
         // get images
-        results = await Recipes.files(recipe.id)
+        results = await Recipes.files(recipes.id)
         let files = results.rows
         files = files.map(file =>({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
         }))
         
-        return res.render("admin/recipes/editRecipe", {recipe,chefOptions,files})      
+        return res.render("admin/recipes/editRecipe", {recipes,chefOptions,files})      
     },
     
     async put(req,res){
         const keys= Object.keys(req.body) // retorna chave de todos vetores
         
         for(key of keys){
-            if(req.body[key] == "" && key != "removed_files" && key != "photos"){ // Verifica se tem campos vazios
+            if(req.body[key] == "" && key != "removed_files"){ // Verifica se tem campos vazios
                 return res.send("Please, fill all fields!")
             }
         }
+        
        if (req.files.length != 0) {
-            const newFilesPromise = req.files.map(file =>
-                File.create({filename: file.filename, path: file.path}))
+            const filesPromise = req.files.map( file => File.create({ filename: file.filename, path: file.path }))
 
-             await Promise.all(newFilesPromise)
-        }
-   
+            const filesIds = await Promise.all(filesPromise)
+            
+            const recipe_id = req.body.id
+
+            const recipeFilesPromise = filesIds.map( file_id => File.createRF(recipe_id, file_id.rows[0].id ))
+            await Promise.all(recipeFilesPromise)
+        }        
+
+     
+ 
+
         if (req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",")
             const lastIndex = removedFiles.length - 1
@@ -106,6 +115,12 @@ module.exports = {
             const removedFilesPromise = removedFiles.map(id => File.delete(id))
 
             await Promise.all(removedFilesPromise)
+        } 
+
+        let results = await Recipes.files(req.body.id)
+        const files = results.rows
+        if(files.length  == 0 && req.files.length == 0){
+            return res.send('please, send at least one image!')
         } 
 
         await Recipes.update(req.body)
