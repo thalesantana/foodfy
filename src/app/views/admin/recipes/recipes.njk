@@ -11,12 +11,12 @@
                 {%for recipe in indexRecipes%}
                    
                         <div class="recipeCard">
-                            <img src="{{file[0].src}}" alt="foto de {{recipe.title}}" id="recipeImg">
+                            <img src="{{files[0].src}}" alt="foto de {{recipe.title}}" id="recipeImg">
                             <div class="details">
                                 <h4>{{recipe.title}}</h4>
-                                {%for chefs in chef%}
-                                    {% if chefs.id == recipe.chef_id %}
-                                        <p>por {{chefs.name}}</p> 
+                                {%for chef in chefs%}
+                                    {% if chef.id == recipe.chef_id %}
+                                        <p>por {{chef.name}}</p> 
                                     {% endif %} 
                                 {%endfor%}  
                                 <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>

@@ -12,7 +12,7 @@
     </div> 
 
     <div class="chefInfo">
-        <img src="{{files[0].src}}" alt="imagem de {{chef.name}} " class="chefImg">
+        <img src="{{files[0].src}}" alt="imagem de {{chefs.name}} " class="chefImg">
         <h3 id="title">{{chefs.name}}</h3>
         {% if chefs.total_recipes == null %}
             <p class=total>0 receitas</p>
@@ -24,21 +24,17 @@
     <h3 id="recipes">Receitas</h3>
     <div class="recipesCard">
                 {%for recipe in recipeData%}
-                    {%if recipe.chef_id == chef.id %}
+                   <!-- {%if recipe.chef_id == chefs.id %} -->
                         <div class="recipeCard">
                             <img src="{{recipe.image}}" alt="foto de {{recipe.name}}" id="recipeImg">
                             <div class="details">
                                 <h4>{{recipe.title}}</h4>
-                                {%for chef in chefs%}
-                                        {% if chefs.id == recipe.chef_id %}
-                                           <p>por {{chef.name}}</p> 
-                                        {% endif%}
-                                {%endfor%}
+                                <p>por {{recipe.chef_name}}</p> 
                                 <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
                             </div>
                             
                         </div> 
-                    {%endif%}
+                   <!--  {%endif%}-->
                         
                 {%endfor%}
     </div>

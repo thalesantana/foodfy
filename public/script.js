@@ -1,13 +1,16 @@
+//const Recipes = require('../src/app/Models/privateRecipeModel')
 const PhotosUpload = {
     input: "",
     preview: document.querySelector('#photos-preview'),
     uploadLimit: 5,
     files: [],
+    //photo = [],
     handleFileInput(event){
         const{files:fileslist} = event.target
         PhotosUpload.input = event.target
-
-        if(PhotosUpload.hasLimit(event)) return
+        //photo.push(document.getElementsByClassName('photo')),
+        //console.log(photo)
+        if(PhotosUpload.hasLimit(event) /*|| PhotosUpload.hasMin(event)*/) return
 
         Array.from(fileslist).forEach(file => {
             PhotosUpload.files.push(file)
@@ -27,6 +30,17 @@ const PhotosUpload = {
         })
         PhotosUpload.input.files = PhotosUpload.getAllfiles()
     },
+   /* hasMin(event){
+        const{ files:fileslist } = input 
+
+        let results = await Recipes.files(req.body.id)
+        const files = results.rows
+        if(files.length  == 0 && fileslist.length == 0){
+            alert('please, send at least one image!')
+            event. preventDefault()
+            return true
+        } 
+    }, */
     hasLimit(event){
         const {uploadLimit, input, preview} = PhotosUpload
         const{ files:fileslist } = input 
