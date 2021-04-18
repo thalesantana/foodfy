@@ -104,9 +104,6 @@ module.exports = {
             await Promise.all(recipeFilesPromise)
         }        
 
-     
- 
-
         if (req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",")
             const lastIndex = removedFiles.length - 1
@@ -128,9 +125,8 @@ module.exports = {
         return res.redirect(`/admin/recipes/${req.body.id}`)
        
     },
-    delete(req, res){
-        Recipes.delete(req.body.id, function(){
-                return res.redirect(`/admin/recipes`)
-            })  
+    async delete(req, res){
+        await Recipes.delete(req.body.id)
+        return res.redirect(`/admin/recipes`)        
     },
 }
