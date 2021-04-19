@@ -5,7 +5,8 @@ const File = require('./fileModel')
 
 module.exports = {
     async create(data){ 
-        const query = `
+        try{
+            const query = `
             INSERT INTO recipes(
                chef_id,
                title,
@@ -16,20 +17,24 @@ module.exports = {
             ) VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id
         `
-        const values = [ 
-            data.chef_id,
-            data.title,
-            data.ingredients,
-            data.preparation,
-            data.information,
-            date(Date.now()).iso
-        ]
-        
-        const results = await db.query(query,values)
-        return results.rows[0].id
+            const values = [ 
+                data.chef_id,
+                data.title,
+                data.ingredients,
+                data.preparation,
+                data.information,
+                date(Date.now()).iso
+            ]
+            
+            const results = await db.query(query,values)
+            return results.rows[0].id
+        }catch(error){
+            throw error
+        }
    },
-   update(data){
-        const query = `
+   async update(data){
+        try{
+            const query = `
             UPDATE recipes SET
                chef_id = ($1),
                title = ($2),
@@ -47,12 +52,15 @@ module.exports = {
             data.id
         ]
         
-        return db.query(query, values)
+        return await db.query(query, values)
+        }catch(error){
+            throw error
+        }
+        
     }, 
     async delete(id){
         try{
             const result = await db.query(`SELECT * FROM recipes_files WHERE recipe_id = $1`, [id])
-            ///console.log(result.rows[0])
             let ids = result.rows
             ids.map(file => File.delete(file.file_id))
 
@@ -84,10 +92,15 @@ module.exports = {
             throw error
         }
     },
-    indexRecipes(){
-        return db.query(`SELECT recipes.*, chefs.name AS chef_name
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`)
+    async indexRecipes(){
+        try{
+            return await db.query(`SELECT recipes.*, chefs.name AS chef_name
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`)
+        }catch(error){
+            throw error
+        }
+        
     },
     async files(id){
         try {
@@ -100,38 +113,5 @@ module.exports = {
           catch (err) {
             console.error(err)
           }
-    },
-    async updateFiles(data, callback){
-        const query = `
-            UPDATE files SET
-               name = ($1),
-               path = ($2)
-            WHERE id = $7
-        `
-        const values = [
-            data.name,
-            data.path,
-            data.id
-        ]
-        
-        db.query(query, values, function(err, results){
-            if(err) throw `Database Error!${err}` 
-            
-            callback()
-        })
-    },
-    async allFiles(){
-        try {
-            const query = `
-              SELECT * FROM files
-              LEFT JOIN recipes_files ON (recipes_files.file_id = files.id)`
-            
-            const results = await db.query(query)
-            //console.log(results.rows)
-            return results
-          } 
-          catch (err) {
-            console.error(err)
-          }
-    },
+    }
 }

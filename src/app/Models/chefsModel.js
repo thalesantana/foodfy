@@ -3,50 +3,66 @@ const {date} = require('../../lib/utils')
 const File = require('./fileModel')
 
 module.exports = {
-    allChefs(){
-        return db.query(`SELECT chefs.*, count(recipes) AS total_recipes
-        FROM chefs
-        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-        LEFT JOIN files ON  (chefs.file_id =  files.id)
-        GROUP BY chefs.id`)    
+   async allChefs(){
+        try{
+            return await db.query(`SELECT chefs.*, count(recipes) AS total_recipes
+            FROM chefs
+            LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+            LEFT JOIN files ON  (chefs.file_id =  files.id)
+            GROUP BY chefs.id`) 
+        } catch(error){
+            throw error
+        } 
     },
-    find(id){
-       return db.query(`
-        SELECT chefs.*, (SELECT count(*) FROM recipes WHERE recipes.chef_id = $1 ) as total_recipes 
-        FROM chefs WHERE chefs.id = $1
-        GROUP BY chefs.id `, [id])
+    async find(id){
+        try{
+            return await db.query(`
+            SELECT chefs.*, (SELECT count(*) FROM recipes WHERE recipes.chef_id = $1 ) as total_recipes 
+            FROM chefs WHERE chefs.id = $1
+            GROUP BY chefs.id `, [id])
+        } catch(error){
+            throw error
+        }
     },
-    create(name,file_id){
-        const query = `
-        INSERT INTO chefs(
-            name,
-            file_id,
-            created_at
-        ) VALUES ($1, $2, $3)
-        RETURNING id
-    `
-        const values = [ 
-            name,
-            file_id,
-            date(Date.now()).iso
-        ] 
-    return db.query(query, values)
+    async create(name,file_id){
+        try{
+            const query = `
+                INSERT INTO chefs(
+                    name,
+                    file_id,
+                    created_at
+                ) VALUES ($1, $2, $3)
+                RETURNING id
+            `
+                const values = [ 
+                    name,
+                    file_id,
+                    date(Date.now()).iso
+                ] 
+            return await db.query(query, values)
+        } catch(error){
+            throw error
+        }       
     },
     
     async update(data,file_id){
-        const query = `
-            UPDATE chefs SET
-                name =($1),
-                file_id = ($2)
-            WHERE id = $3
-        `
-        const values = [
-            data.name,
-            file_id,
-            data.id
-        ]
-        
-        return db.query(query, values)
+        try{
+            const query = `
+                UPDATE chefs SET
+                    name =($1),
+                    file_id = ($2)
+                WHERE id = $3
+            `
+            const values = [
+                data.name,
+                file_id,
+                data.id
+            ]
+            
+            return await db.query(query, values)
+        } catch(error){
+            throw error
+        }  
     }, 
     async delete(id,file_id){    
         try{
@@ -58,9 +74,13 @@ module.exports = {
         }     
     },
 
-    files(id){
-        return db.query(`SELECT * FROM files WHERE id = $1`,
-        [id])
+    async files(id){
+        try{
+            return await db.query(`SELECT * FROM files WHERE id = $1`,[id])
+        }catch(error){
+            throw error
+        }
+        
     }
 }
 

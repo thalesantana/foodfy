@@ -1,44 +1,49 @@
 const data = require('../Models/publicRecipeModel')
 
 module.exports={
-    home(req,res){
+    async home(req,res){
         const { filter } = req.query
 
         if(filter){
-            data.findBy(filter,function(RecipeData){
-                return res.render('publicRecipes/recipes-list',{ filter,RecipeData })
-            })
+            let results = await data.findBy(filter)
+            const RecipeData = results.rows
+            return res.render('publicRecipes/recipes-list',{ filter,RecipeData })
         } else{
-            data.indexRecipes(function(RecipeData){
-                return res.render('publicRecipes/index',{ RecipeData })
-            }) 
+            let results = await data.indexRecipes()
+            const RecipeData = results.rows
+            return res.render('publicRecipes/index',{ RecipeData })
+            
         }     
     },
     about(req,res){
         return res.render("publicRecipes/about")
     },
-    recipes(req,res){
+    async recipes(req,res){
         const { filter } = req.query
-        if( filter ){
-            data.findBy(filter,function(RecipeData){
-                return res.render('publicRecipes/recipes-list',{ filter,RecipeData })
-            })
+
+        if(filter){
+            let results = await data.findBy(filter)
+            const RecipeData = results.rows
+            return res.render('publicRecipes/recipes-list',{ filter,RecipeData })
         } else{
-            data.indexRecipes(function(RecipeData){
-                return res.render('publicRecipes/recipes-list',{ RecipeData })
-            }) 
-        } 
+            let results = await data.indexRecipes()
+            const RecipeData = results.rows
+            return res.render('publicRecipes/recipes-list',{ RecipeData })
+            
+        }  
     },
-    show(req,res){
-        data.findRecipe(req.params.id, function(recipe){
-            if(!recipe) return res.send("recipe not found!")
-                
-            return res.render('publicRecipes/recipe',{recipe})
-        })
+    async show(req,res){
+        let results = await data.findRecipe(req.params.id)
+        const recipe =  results.rows
+        
+        if(!results) return res.send("recipe not found!")
+        
+        return res.render('publicRecipes/recipe',{recipe})
+        
     },
-    chefs(req,res){
-        data.allChefs(function(chefs){
-                return res.render('publicRecipes/chefs',{chefs})
-            })
+    async chefs(req,res){
+        let results = await data.allChefs()
+        const chefs = results.rows
+        return res.render('publicRecipes/chefs',{chefs})       
     }, 
 }
