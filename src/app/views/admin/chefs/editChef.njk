@@ -3,22 +3,17 @@
 {%block content%}
 
 <section class="create"> 
+<form id="form-save" method="POST" action="/admin/chefs?_method=PUT" enctype="multipart/form-data">
+    <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
     <div class='top2'>
         <h1  class="createTitle">Editando Chef</h1>
-        <form  id="form-delete" method="POST" action="/admin/chefs?_method=DELETE" >
-            <script>
-               
-            </script>
-            <button  onclick="alertclick()" type="submit" class="delet">Deletar</button>
-            
-            <input type="hidden" name="id" value="{{chef.id}}">
-            <input id ="total" type="hidden" name="total_recipes" value="{{chef.total_recipes}}">
-        </form>
-
-               
-        <form class="form" method="POST" action="/admin/chefs?_method=PUT" >
-            <button type="submit" class="save">Salvar Chef</button>
-        
+        {% if chef.total_recipes == 0 %}
+            <button  form="form-delete"type="submit" class="delet">Deletar</button>
+        {% endif %}
+        {% if chef.total_recipes > 0 %}
+            <button  type="reset" onclick="alertclick()"  class="delet">Deletar</button>
+        {% endif %}
+        <button form="form-save" type="submit" class="save">Salvar Chef</button>    
     </div>
     <h3>Nome</h3>
     <div>
@@ -29,17 +24,25 @@
         >
     </div>
 
-     <h3>Avatar</h3>
-
+    <h3>Avatar</h3>
+    <input type="hidden" name="old_file" value="{{Files[0].id}}">
+    <input type="text" value= "{{Files[0].path}}">
     <div class='input-wrapper'>
         
         <span id='file-name' ></span>
         
         <label class="send-avatar" for='input-file'>
-            Enviar Avatar
+            Trocar Avatar
         </label>
-        <input id='input-file' type='file' name="photos" accept="image/*" onchange="PhotosUpload.handleFileInput(event)"/>
+        <input id='input-file'  type='file' name="photos" accept="image/*" onchange="PhotosUpload.handleFileInput(event)"/>
         
     </div>
+<input type="hidden" name="id" value="{{chef.id}}">
+</form>
+<form  id="form-delete" method="POST" action="/admin/chefs?_method=DELETE" >
+    <input type="hidden" name="file_id" value={{chef.file_id}}>
+    <input type="hidden" name="id" value="{{chef.id}}">
+</form>
 </section>
+<script src="/delet.js"></script>
 {%endblock%}

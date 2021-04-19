@@ -1,5 +1,6 @@
 const db = require('../../config/db')
 const {date} = require('../../lib/utils')
+const File = require('./fileModel')
 
 module.exports = {
     allChefs(){
@@ -15,7 +16,7 @@ module.exports = {
         FROM chefs WHERE chefs.id = $1
         GROUP BY chefs.id `, [id])
     },
-    create(data,file_id){
+    create(name,file_id){
         const query = `
         INSERT INTO chefs(
             name,
@@ -25,14 +26,14 @@ module.exports = {
         RETURNING id
     `
         const values = [ 
-            data.name,
+            name,
             file_id,
             date(Date.now()).iso
         ] 
     return db.query(query, values)
     },
     
-    update(data, callback){
+    async update(data,file_id){
         const query = `
             UPDATE chefs SET
                 name =($1),
@@ -41,22 +42,20 @@ module.exports = {
         `
         const values = [
             data.name,
-            data.file_id,
+            file_id,
             data.id
         ]
         
-        db.query(query, values, function(err, results){
-            if(err) throw `Database Error!${err}` 
-            
-            callback()
-        })
+        return db.query(query, values)
     }, 
-    delete(id, callback){    
-        db.query(`DELETE FROM chefs WHERE id= $1`, [id],function(err, results){
-            if(err) throw `Database Error! ${err}` 
-            
-            return callback()   
-        })     
+    async delete(id,file_id){    
+        try{
+             await File.delete(file_id)
+
+            return db.query(`DELETE FROM chefs WHERE id= $1`, [id])  
+        } catch(error) {
+            throw(error)
+        }     
     },
 
     files(id){

@@ -1,6 +1,8 @@
 const {date} = require('../../lib/utils')
 const db = require('../../config/db')
 const fs = require('fs')
+const File = require('./fileModel')
+
 module.exports = {
     async create(data){ 
         const query = `
@@ -26,7 +28,7 @@ module.exports = {
         const results = await db.query(query,values)
         return results.rows[0].id
    },
-   update(data, callback){
+   update(data){
         const query = `
             UPDATE recipes SET
                chef_id = ($1),
@@ -49,16 +51,15 @@ module.exports = {
     }, 
     async delete(id){
         try{
-            const result = await db.query(`SELECT * FROM files WHERE id = $1`, [id])
+            const result = await db.query(`SELECT * FROM recipes_files WHERE recipe_id = $1`, [id])
             ///console.log(result.rows[0])
-            const file = result.rows[0]
+            let ids = result.rows
+            ids.map(file => File.delete(file.file_id))
 
-            fs.unlinkSync(file.path)   
             return db.query(`DELETE FROM recipes WHERE id= $1`, [id])  
         } catch(error) {
             throw(error)
         }
-        
         
     },
     async find(id){
