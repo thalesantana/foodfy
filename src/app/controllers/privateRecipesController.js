@@ -1,7 +1,6 @@
 const Recipes = require('../models/privateRecipeModel')
 const chef = require('../models/chefsModel')
 const File = require('../Models/fileModel')
-const  alert = require('node-popup').alert 
 
 module.exports = {
     async index(req,res){
@@ -11,7 +10,20 @@ module.exports = {
         results = await chef.allChefs()
         const chefs = results.rows
 
-        return res.render("admin/recipes/recipes",{chefs,indexRecipes})
+        async function getImage(recipeId){
+            let results = await Recipes.files(recipeId)
+            const files = results.rows.map(file =>(`${req.protocol}://${req.headers.host}${file.path.replace("public","")}`))
+            let file = files[0]
+            return file
+        }
+
+        const recipesPromisse = indexRecipes.map(async indexRecipes =>{
+            indexRecipes.img = await getImage(indexRecipes.id)
+            return indexRecipes
+        })
+        const lastAdded = await Promise.all(recipesPromisse)
+        
+        return res.render("admin/recipes/recipes",{chefs,indexRecipes:lastAdded})
     },
     async create(req,res){ 
         let results = await chef.allChefs()
